@@ -11,5 +11,3 @@ const Portal = createApp(App).use(store).use(router);
 registerComponents(Portal);
 
 Portal.mount('#app');
-
-NotificationFunctions.infoAlert({ title: 'hello', text: 'im working bro im fckin working' });

@@ -3,10 +3,12 @@
     <div
       :key="id"
       v-if="visible"
-      class="flex h-16 mt-1 mr-2 mb-1 my-5 z-50 top-0 w-full toaster right-0 mx-auto bg-white relative max-w-sm rounded-lg shadow-md cursor-pointer overflow-hidden dark:bg-gray-800"
+      @mouseover="pauseToastHide"
+      @mouseout="resumeToastHide"
+      class="flex relative w-full h-16 max-w-sm mx-auto overflow-hidden right-0 bg-white mr-2 mt-1 mb-1 rounded-lg shadow-md dark:bg-gray-800 my-5 top-0 z-50 toaster cursor-pointer"
     >
       <span
-        class="absolute text-gray-500 right-1 top-1 mr-2 cursor-pointer hover:text-black"
+        class="absolute text-gray-500 right-1 top-1 mr-2 cursor-pointer hover:text-red-500"
         @click="hideToast()"
       >
         <i class="fas fa-times text-xs"></i>
@@ -76,7 +78,7 @@
     name: 'Toast',
     data: () => {
       return {
-        timeR: null,
+        timer: new Timer(() => {}, 0),
         visible: true,
       };
     },
@@ -85,13 +87,19 @@
     },
     methods: {
       triggerToast(): void {
-        new Timer(() => {
+        this.timer = new Timer(() => {
           this.hideToast();
         }, this.delay);
       },
       hideToast(): void {
         this.visible = false;
         store.dispatch(TOAST_STORE.ACTIONS.REMOVE_TOAST, this.id);
+      },
+      pauseToastHide(): void {
+        this.timer.pause();
+      },
+      resumeToastHide(): void {
+        this.timer.resume();
       },
     },
     computed: {

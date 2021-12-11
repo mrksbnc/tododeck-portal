@@ -1,5 +1,5 @@
 <template>
-  <div class="flex absolute flex-col h-full w-2/5 right-0">
+  <div class="flex absolute flex-col h-screen-max w-2/5 right-0">
     <Toast
       v-for="(item, index) in toastStack"
       :id="item.id"
