@@ -1,0 +1,49 @@
+'use strict';
+
+export enum RootGetters {
+  GET_ROOT_STORE_VERSION = 'GET_ROOT_STORE_VERSION',
+}
+
+export enum RootMutations {
+  UPDATE_VERSION = 'UPDATE_VERSION',
+  SET_ROOT_DISPATCH = 'SET_ROOT_DISPATCH',
+}
+
+export enum RootActions {
+  UPDATE_VERSION = 'UPDATE_VERSION',
+}
+
+export enum ModalGetters {
+  GET_MODALS = 'GET_MODALS',
+  GET_MODAL_STATUS = 'GET_MODAL_STATUS',
+}
+
+export enum ModalMutations {
+  ADD_MODAL = 'ADD_MODAL',
+  REMOVE_MODAL = 'REMOVE_MODAL',
+  SET_MODAL_STATUS = 'SET_MODAL_STATUS',
+  SET_ROOT_DISPATCH = 'SET_ROOT_DISPATCH',
+}
+
+export enum ModalActions {
+  ADD_MODAL = 'ADD_MODAL',
+  REMOVE_MODAL = 'REMOVE_MODAL',
+  SET_MODAL_STATUS = 'SET_MODAL_STATUS',
+  SET_ROOT_DISPATCH = 'SET_ROOT_DISPATCH',
+}
+
+export enum ToastGetters {
+  GET_TOASTS = 'GET_TOASTS',
+}
+
+export enum ToastMutations {
+  ADD_TOAST = 'ADD_TOAST',
+  REMOVE_TOAST = 'REMOVE_TOAST',
+  SET_ROOT_DISPATCH = 'SET_ROOT_DISPATCH',
+}
+
+export enum ToastActions {
+  ADD_TOAST = 'ADD_TOAST',
+  REMOVE_TOAST = 'REMOVE_TOAST',
+  SET_ROOT_DISPATCH = 'SET_ROOT_DISPATCH',
+}

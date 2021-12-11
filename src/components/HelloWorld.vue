@@ -1,14 +1,10 @@
 <script setup lang="ts">
-  import { ref, defineProps } from 'vue';
-
-  defineProps<{ msg: string }>();
+  import { ref } from 'vue';
 
   const count = ref(0);
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
-
   <p>
     Recommended IDE setup:
     <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
