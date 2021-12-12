@@ -5,21 +5,37 @@ import ToastVariants from '@/data/enums/toastVariants';
 import { TOAST_STORE } from '@/data/constants/vuexConstants';
 
 class NotificationFunctions {
-  public static infoAlert({ title, text }: { title: string; text: string }): void {
-    store.dispatch(TOAST_STORE.ACTIONS.ADD_TOAST, { title, text, variant: ToastVariants.INFO });
+  public infoAlert({ title, text }: { title: string; text: string }): void {
+    store.dispatch(TOAST_STORE.ACTIONS.ADD_TOAST, {
+      title,
+      text,
+      variant: ToastVariants.INFO,
+    });
   }
 
-  public static successAlert({ title, text }: { title: string; text: string }): void {
-    store.dispatch(TOAST_STORE.ACTIONS.ADD_TOAST, { title, text, variant: ToastVariants.SUCCESS });
+  public successAlert({ title, text }: { title: string; text: string }): void {
+    store.dispatch(TOAST_STORE.ACTIONS.ADD_TOAST, {
+      title,
+      text,
+      variant: ToastVariants.SUCCESS,
+    });
   }
 
-  public static warningAlert({ title, text }: { title: string; text: string }): void {
-    store.dispatch(TOAST_STORE.ACTIONS.ADD_TOAST, { title, text, variant: ToastVariants.WARNING });
+  public warningAlert({ title, text }: { title: string; text: string }): void {
+    store.dispatch(TOAST_STORE.ACTIONS.ADD_TOAST, {
+      title,
+      text,
+      variant: ToastVariants.WARNING,
+    });
   }
 
-  public static errorAlert({ title, text }: { title: string; text: string }): void {
-    store.dispatch(TOAST_STORE.ACTIONS.ADD_TOAST, { title, text, variant: ToastVariants.ERROR });
+  public errorAlert({ title, text }: { title: string; text: string }): void {
+    store.dispatch(TOAST_STORE.ACTIONS.ADD_TOAST, {
+      title,
+      text,
+      variant: ToastVariants.ERROR,
+    });
   }
 }
 
-export default NotificationFunctions;
+export default new NotificationFunctions();

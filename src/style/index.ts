@@ -1,2 +1,2 @@
-import './portal.scss';
-import './tailwind.css';
+import './scss/portal.scss';
+import './css/tailwind.css';

@@ -15,5 +15,9 @@
   "parserOptions": {
     "ecmaVersion": "latest"
   },
-  "rules": {}
+  "rules": {
+    "prettier/prettier": 0,
+    "vue/max-attributes-per-line": 0,
+    "@typescript-eslint/no-empty-function": 0
+  }
 }

@@ -6,7 +6,7 @@ import NotificationFunctions from './notificationFunctions';
 import { MODAL_STORE } from '@/data/constants/vuexConstants';
 
 class ModalFunctions {
-  public static openModal({ componentName }: { componentName: string }): void {
+  public openModal({ componentName }: { componentName: string }): void {
     if (!componentNameCollection.includes(componentName)) {
       NotificationFunctions.errorAlert({
         title: 'Missing Component Error',
@@ -19,4 +19,4 @@ class ModalFunctions {
   }
 }
 
-export default ModalFunctions;
+export default new ModalFunctions();

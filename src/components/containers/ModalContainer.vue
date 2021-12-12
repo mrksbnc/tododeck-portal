@@ -1,5 +1,5 @@
 <template>
-  <component v-for="modal in modalStack" :key="modal.id" :is="modal.name" />
+  <component :is="modal.name" v-for="modal in modalStack" :key="modal.id" />
 </template>
 
 <script lang="ts">
