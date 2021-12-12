@@ -1,6 +1,5 @@
 module.exports = {
-  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./src/**/*.{html,js,vue}'],
   theme: {
     extend: {
       zIndex: {
@@ -11,9 +10,6 @@ module.exports = {
         'liquid-marble': "url('./src/assets/images/liquid-marble.jpeg')",
       },
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [],
 };

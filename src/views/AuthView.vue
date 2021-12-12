@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full flex justify-center items-center bg-teal-500">
+  <div class="w-full h-full flex justify-center items-center bg-teal-600">
     <div class="container mx-auto w-4/5 h-5/6 rounded-lg bg-white flex flex-row">
       <div
         class="flex justify-center h-full items-center w-1/2 bg-white rounded-lg bg-cover bg-liquid-marble"
@@ -23,21 +23,37 @@
               </div>
             </div>
             <div class="h-1/5 flex flex-col justify-end">
-              <label class="text-base font-light font-mono text-white">
+              <label v-if="isSignUp" class="text-base font-light font-mono text-white">
                 Already have an account?
               </label>
-              <p
-                class="cursor-pointer hover:text-teal-300 text-lg font-semibold text-white font-mono"
+              <label v-else class="text-base font-light font-mono text-white">
+                Not a member yet?
+              </label>
+              <span
+                v-if="isSignUp"
+                class="cursor-pointer hover:text-teal-300 text-lg w-1/3 font-semibold text-white font-mono"
                 @click="changeActiveComponent()"
               >
                 Sign in
-              </p>
+              </span>
+              <span
+                v-else
+                class="cursor-pointer hover:text-teal-300 text-lg w-1/3 font-semibold text-white font-mono"
+                @click="changeActiveComponent()"
+              >
+                Sign up
+              </span>
             </div>
           </div>
         </div>
       </div>
       <div class="w-1/2 h-full">
-        <component :is="activeComponent" class="w-full" />
+        <component
+          :is="activeComponent"
+          :key="forceRenderKey"
+          class="w-full"
+          @changeComponent="changeComponent"
+        />
       </div>
     </div>
   </div>
@@ -45,21 +61,35 @@
 
 <script lang="ts">
   import AuthComponents from '@/data/enums/authComponents';
-  import { defineComponent, ref } from '@vue/runtime-core';
+  import { defineComponent, ref, computed, nextTick } from '@vue/runtime-core';
 
   export default defineComponent({
     name: 'LoginView',
     setup() {
-      const activeComponent = ref(AuthComponents.SIGN_UP);
+      const forceRenderKey = ref(0);
+      const selectedComponent = ref(AuthComponents.SIGN_UP);
+
+      const activeComponent = computed(() => {
+        return selectedComponent.value;
+      });
+
+      const isSignUp = activeComponent.value === AuthComponents.SIGN_UP;
 
       function changeActiveComponent() {
-        if (activeComponent.value === AuthComponents.SIGN_UP)
-          activeComponent.value = AuthComponents.LOGIN;
-        if (activeComponent.value === AuthComponents.LOGIN)
-          activeComponent.value = AuthComponents.SIGN_UP;
+        if (selectedComponent.value == AuthComponents.SIGN_UP)
+          selectedComponent.value = AuthComponents.LOGIN;
+        else selectedComponent.value = AuthComponents.SIGN_UP;
+
+        nextTick(() => {
+          ++forceRenderKey.value;
+        });
       }
 
-      return { activeComponent, changeActiveComponent };
+      function changeComponent() {
+        changeActiveComponent();
+      }
+
+      return { forceRenderKey, activeComponent, isSignUp, changeActiveComponent, changeComponent };
     },
   });
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <label v-if="label" class="form-label block mb-1 font-semibold text-gray-700" :for="id">
+    <label v-if="label" class="block mb-1 font-semibold text-xs text-gray-700" :for="id">
       {{ label }}
     </label>
     <input
@@ -11,12 +11,12 @@
       :value="modelValue"
       :disabled="disabled"
       :placeholder="placeholder"
-      :class="[{ 'border-red-600': errors.length || hasError }, cssClasses]"
-      class="pl-4 py-2 h-9 leading-tight block w-full text-gray-800 font-sans rounded text-left appearance-none outline-none placeholder-gray-400"
+      :class="[{ 'border border-red-500': hasError }, cssClasses]"
+      class="pl-4 py-2 h-8 leading-tight block w-full text-gray-800 font-sans rounded text-left appearance-none outline-none placeholder-gray-400"
       @input="updateInput"
     />
-    <div v-show="errors.length" class="text-red-600 mt-1 text-sm">
-      {{ errors[0] }}
+    <div v-show="error" class="text-red-600 mt-1 text-xs">
+      {{ error }}
     </div>
   </div>
 </template>
@@ -54,9 +54,9 @@
         type: Boolean,
         default: false,
       },
-      errors: {
-        type: Array,
-        default: () => [],
+      error: {
+        type: String,
+        default: '',
       },
       hasError: {
         type: Boolean,
@@ -73,7 +73,7 @@
 
       const cssClasses = computed(() => {
         return {
-          'border-2 border-gray-400 focus:border-gray-700': props.bordered === true,
+          'border border-gray-300 focus:border-gray-700': props.bordered === true,
           'border bg-gray-200 focus:bg-white focus:border-gray-600': props.bordered === false,
         };
       });

@@ -4,12 +4,15 @@
     <div
       v-if="visible"
       :key="id"
-      class="flex pointer-events-auto relative w-full h-16 max-w-sm mx-auto overflow-hidden right-0 bg-white my-1 rounded-lg shadow-md dark:bg-gray-800 top-0 z-50 toaster cursor-pointer"
+      :class="[
+        { 'h-16': messageLength < 80, 'h-18': messageLength > 80 },
+        'flex pointer-events-auto relative w-full max-w-sm mx-auto overflow-hidden right-0 bg-white my-1 rounded-lg shadow-md dark:bg-gray-800 top-0 z-50 toaster cursor-pointer',
+      ]"
       @mouseover="pauseToastHide()"
       @mouseout="resumeToastHide()"
     >
       <span
-        class="absolute flex text-gray-500 h-full right-1 ml-2 cursor-pointer hover:text-red-500 p-1"
+        class="absolute flex text-gray-500 h-full right-0 pr-2 ml-2 cursor-pointer hover:text-red-500 p-1 hover:bg-gray-500"
         @click="hideToast()"
       >
         <i class="fas fa-times text-xs self-center" />
@@ -50,7 +53,7 @@
       </div>
       <div v-if="error" class="flex items-center justify-center w-12 bg-red-600">
         <svg
-          class="w-6 h-6 text-white fill-current"
+          class="w-8 h-6 text-white fill-current"
           viewBox="0 0 40 40"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -59,11 +62,11 @@
           />
         </svg>
       </div>
-      <div class="px-4 py-3 -mx-3">
-        <div class="mx-3">
+      <div class="px-4 py-3">
+        <div class="mb-2 w-7/8">
           <span :class="titleColor" class="font-semibold">{{ title }}</span>
-          <p class="text-sm text-gray-600 dark:text-gray-200">
-            {{ text }}
+          <p class="text-xs text-gray-600 dark:text-gray-200 text-left">
+            {{ processedMessage }}
           </p>
         </div>
       </div>
@@ -146,6 +149,19 @@
           default:
             return 'text-blue-500 dark:text-blue-400';
         }
+      },
+      messageLength: function () {
+        return this.text.length;
+      },
+      processedMessage: function () {
+        let result: string[] = [];
+        this.text.split('').forEach((e, i) => {
+          if (i % 70 == 0) {
+            result.push('\r\n');
+          }
+          result.push(e);
+        });
+        return result.join('');
       },
     },
     mounted() {
