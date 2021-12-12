@@ -1,10 +1,8 @@
 <template>
   <div class="w-full">
-    <!-- eslint-disable-next-line vue/max-attributes-per-line -->
     <label v-if="label" class="form-label block mb-1 font-semibold text-gray-700" :for="id">
       {{ label }}
     </label>
-    <!--  eslint-disable-next-line vue/html-self-closing -->
     <input
       :id="id"
       ref="input"
@@ -12,11 +10,11 @@
       v-bind="$attrs"
       :value="modelValue"
       :disabled="disabled"
+      :placeholder="placeholder"
       :class="[{ 'border-red-600': errors.length || hasError }, cssClasses]"
       class="pl-4 py-2 h-9 leading-tight block w-full text-gray-800 font-sans rounded text-left appearance-none outline-none placeholder-gray-400"
       @input="updateInput"
     />
-    <!-- eslint-disable-next-line vue/max-attributes-per-line -->
     <div v-show="errors.length" class="text-red-600 mt-1 text-sm">
       {{ errors[0] }}
     </div>
@@ -27,7 +25,7 @@
   import { ComponentPublicInstance, computed, defineComponent, ref } from '@vue/runtime-core';
 
   export default defineComponent({
-    name: 'FormInput',
+    name: 'BaseInput',
     inheritAttrs: false,
     props: {
       id: {
@@ -45,6 +43,10 @@
         default: '',
       },
       label: {
+        type: String,
+        default: '',
+      },
+      placeholder: {
         type: String,
         default: '',
       },

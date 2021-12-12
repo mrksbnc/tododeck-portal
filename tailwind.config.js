@@ -7,6 +7,9 @@ module.exports = {
         toast: '9010',
         modal: '9000',
       },
+      backgroundImage: {
+        'liquid-marble': "url('./src/assets/images/liquid-marble.jpeg')",
+      },
     },
   },
   variants: {

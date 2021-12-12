@@ -1,10 +1,7 @@
-html {
+html,
+body,
+#app {
   width: 100% !important;
   height: 100% !important;
-}
-
-body {
-  width: inherit;
-  height: inherit;
-  overflow: hidden;
+  overflow: hidden !important;
 }
