@@ -1,38 +1,53 @@
 <template>
-  <div class="flex flex-col items-center text-center bg-blue-400 h-full">
-    <div class="bg-white w-full h-24 max-h-24 text-white flex items-center">
-      <div class="flex items-center w-full">
-        <img
-          class="w-10 h-10 rounded-full mr-4"
-          src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-          alt="Avatar of Jonathan Reinink"
-        />
-        <div class="text-sm">
-          <p class="text-gray-900 leading-none">Jonathan Reinink</p>
-          <p class="text-gray-600">Aug 18</p>
+  <div
+    class="bg-slate-200 flex flex-col w-full h-full text-white flex items-center rounded-tr-lg rounded-br-lg"
+  >
+    <div class="h-1/6 w-full rounded-tr-lg text-center pt-4">
+      <span class="text-lg text-mono text-gray-800 font-bold"> .tododeck </span>
+    </div>
+    <div class="h-3/6 w-full flex flex-col items-center">
+      <div class="flex flex-col items-center content-center">
+        <div class="h-full w-full ml-3 my-4 cursor-pointer flex flex-col content-center">
+          <div v-for="menu in navBarMenuElements" :key="menu.id" class="text-gray-500 d-flex my-2">
+            <i :class="[menu.icon, 'mr-2']" />
+            <span class="hover:text-gray-800 my-2 w-full">
+              {{ menu.name }}
+            </span>
+          </div>
         </div>
       </div>
     </div>
-    <div v-for="item in menuElements" :key="item.id" class="my-4 cursor-pointer">
-      <span class="text-blue-500 hover:text-blue-800" href="#">{{ item.menuName }}</span>
+    <div class="h-2/6 w-full h-full flex flex-col items-center rounded-br-lg">
+      <div class="h-full w-full flex flex-col items-center content-center">
+        <div
+          class="my-4 cursor-pointer h-full flex flex-col h-full w-full ml-3 items-center justify-end"
+        >
+          <div v-for="menu in systemMenuElements" :key="menu.id" class="text-gray-500 d-flex my-2">
+            <i :class="[menu.icon, 'mr-2']" />
+            <span class="hover:text-gray-800 my-2 w-full">
+              {{ menu.name }}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import { NavBarMenuElement } from '@/types/navbar';
   import { defineComponent, ref } from '@vue/runtime-core';
+  import { menuCollection } from '@/data/constants/menuCollection';
+  import { systemMenuCollection } from '@/data/constants/systemMenuCollection';
 
   export default defineComponent({
     name: 'VerticalNavBar',
-    props: {
-      menuElements: {
-        required: true,
-        type: Array as () => NavBarMenuElement[],
-      },
-    },
     setup(props) {
-      const isActive = ref(Number(props?.menuElements[0]?.id) || undefined);
+      const navBarMenuElements = ref(menuCollection);
+      const systemMenuElements = ref(systemMenuCollection);
+
+      const isActive = ref(Number(navBarMenuElements.value[0]?.id) || undefined);
+
+      return { navBarMenuElements, systemMenuElements, isActive };
     },
   });
 </script>

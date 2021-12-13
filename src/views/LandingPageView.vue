@@ -12,7 +12,7 @@
               <div
                 class="w-1/4 p-2 text-white bg-white bg-opacity-30 rounded-sm backdrop-filter backdrop-blur-lg text-center"
               >
-                <label class="text-base font-bold font-mono">Tododeck</label>
+                <span class="text-lg text-mono font-bold font-mono">tododeck</span>
               </div>
               <hr class="border-2 w-1/6 mt-2 mb-10 bg-white" />
               <div class="d-flex flex-col text-white mt-7">

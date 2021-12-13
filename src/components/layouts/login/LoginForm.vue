@@ -41,15 +41,14 @@
 
 <script lang="ts">
   import router from '@/router';
+  import { AxiosError } from 'axios';
+  import { ILoginDTO } from '@/types/dto';
+  import { setToken } from '@/utils/token';
   import apiService from '@/services/apiService';
   import { validateEmail } from '@/utils/validators';
-  import { ILoginDTO } from '@/types/interfaces/dto';
+  import HttpStatusCodeEnum from '@/data/constants/httpStatusCodeEnum';
   import notificationFunctions from '@/functions/notificationFunctions';
   import { computed, defineComponent, ref, nextTick } from '@vue/runtime-core';
-  import { setToken } from '@/utils/token';
-  import { AxiosError } from 'axios';
-  import { ILoginResponseDTO } from '@/types/dto';
-  import HttpStatusCodeEnum from '@/data/constants/httpStatusCodeEnum';
 
   export default defineComponent({
     name: 'LoginForm',

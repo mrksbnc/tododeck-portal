@@ -2,6 +2,7 @@
 
 export interface NavBarMenuElement {
   id: number;
-  menuName: string;
+  icon: string;
+  name: string;
   componentName: string;
 }

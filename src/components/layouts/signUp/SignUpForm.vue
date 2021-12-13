@@ -62,14 +62,14 @@
 </template>
 
 <script lang="ts">
+  import { AxiosError } from 'axios';
+  import { ICreateUserDTO } from '@/types/dto';
   import apiService from '@/services/apiService';
-  import { ICreateUserDTO } from '@/types/interfaces/dto';
   import AuthComponents from '@/data/enums/authComponents';
   import { validateEmail, validatePassword } from '@/utils/validators';
+  import HttpStatusCodeEnum from '@/data/constants/httpStatusCodeEnum';
   import notificationFunctions from '@/functions/notificationFunctions';
   import { defineComponent, ref, computed, nextTick } from '@vue/runtime-core';
-  import HttpStatusCodeEnum from '@/data/constants/httpStatusCodeEnum';
-  import { AxiosError } from 'axios';
 
   export default defineComponent({
     name: 'SignUpForm',
