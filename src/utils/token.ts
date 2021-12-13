@@ -2,7 +2,7 @@
 
 import { IDecodedToken } from '@/types/interfaces/token';
 
-const LOCAL_STORAGE_TOKEN = 'TODODECK__TOKEN';
+const LOCAL_STORAGE_TOKEN = 'todo_token';
 
 export function setToken(token: string): void {
   localStorage.setItem(LOCAL_STORAGE_TOKEN, token);
@@ -18,7 +18,6 @@ export function deleteToken(): void {
 
 export function isTokenValid(): boolean {
   const token = getToken();
-  console.log('token', token);
   if (token) {
     const tokenData = parseJwt(token);
     return Date.now() > tokenData.exp;
