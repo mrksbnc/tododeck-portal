@@ -14,7 +14,7 @@
               >
                 <label class="text-base font-bold font-mono">Tododeck</label>
               </div>
-              <hr class="border-2 w-1/6 mt-2 mb-10" />
+              <hr class="border-2 w-1/6 mt-2 mb-10 bg-white" />
               <div class="d-flex flex-col text-white mt-7">
                 <div class="m-2 text-lg font-mono font-bold">Free up your mental space</div>
                 <div class="m-2 font-light font-mono">
@@ -49,7 +49,7 @@
   import { defineComponent, ref, computed, nextTick } from '@vue/runtime-core';
 
   export default defineComponent({
-    name: 'LoginView',
+    name: 'LandingPageView',
     setup() {
       const forceRenderKey = ref(0);
       const selectedComponent = ref(AuthComponents.LOGIN);
@@ -80,7 +80,6 @@
         forceRenderKey,
         activeComponent,
         activeMessageComponent,
-        changeActiveComponent,
         changeComponent,
       };
     },

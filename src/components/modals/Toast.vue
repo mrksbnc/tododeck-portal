@@ -1,6 +1,5 @@
 <template>
-  <transition name="fade">
-    <!-- <div class="grid·items-center·pointer-events-auto·cursor-pointer z-toast"> -->
+  <transition name="ease-out-modal" leave-active-class="duration-300">
     <div
       v-if="visible"
       :key="id"
@@ -53,7 +52,7 @@
       </div>
       <div v-if="error" class="flex items-center justify-center w-12 bg-red-600">
         <svg
-          class="w-8 h-6 text-white fill-current"
+          class="w-6 h-6 text-white fill-current"
           viewBox="0 0 40 40"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -71,14 +70,20 @@
         </div>
       </div>
     </div>
-    <!-- </div> -->
   </transition>
 </template>
 
 <script lang="ts">
+  import {
+    ref,
+    computed,
+    nextTick,
+    onMounted,
+    onUnmounted,
+    defineComponent,
+  } from '@vue/runtime-core';
   import store from '@/store';
   import Timer from '@/utils/timer';
-  import { defineComponent } from '@vue/runtime-core';
   import ToastVariants from '@/data/enums/toastVariants';
   import { TOAST_STORE } from '@/data/constants/vuexConstants';
 
@@ -106,38 +111,32 @@
         default: 2500,
       },
     },
-    data: () => {
-      return {
-        timer: new Timer(() => {}, 0),
-        visible: true,
-      };
-    },
-    computed: {
-      success: function (): boolean {
-        return this.variant == ToastVariants.SUCCESS;
-      },
-      info: function (): boolean {
-        return this.variant == ToastVariants.INFO;
-      },
-      warning: function (): boolean {
-        return this.variant == ToastVariants.WARNING;
-      },
-      error: function (): boolean {
-        return this.variant == ToastVariants.ERROR;
-      },
-      currentState: function (): ToastVariants {
-        let state = ToastVariants.INFO;
-        if (this.info) state = ToastVariants.INFO;
-        if (this.error) state = ToastVariants.ERROR;
-        if (this.success) state = ToastVariants.SUCCESS;
-        if (this.warning) state = ToastVariants.WARNING;
-        return state;
-      },
-      isVisible: function (): boolean {
-        return this.visible;
-      },
-      titleColor: function (): string {
-        switch (this.currentState) {
+    setup(props) {
+      const timer = ref(new Timer(() => {}, 0));
+      const visible = ref(true);
+
+      const success = computed(() => {
+        return props.variant === ToastVariants.SUCCESS;
+      });
+
+      const info = computed(() => {
+        return props.variant === ToastVariants.INFO;
+      });
+
+      const warning = computed(() => {
+        return props.variant === ToastVariants.WARNING;
+      });
+
+      const error = computed(() => {
+        return props.variant === ToastVariants.ERROR;
+      });
+
+      const isVisible = computed(() => {
+        return visible.value;
+      });
+
+      const titleColor = computed(() => {
+        switch (props.variant) {
           case ToastVariants.SUCCESS:
             return 'text-green-500 dark:text-green-400';
           case ToastVariants.INFO:
@@ -149,42 +148,67 @@
           default:
             return 'text-blue-500 dark:text-blue-400';
         }
-      },
-      messageLength: function () {
-        return this.text.length;
-      },
-      processedMessage: function () {
+      });
+
+      const messageLength = computed(() => {
+        return props.text.length;
+      });
+
+      const processedMessage = computed(() => {
         let result: string[] = [];
-        this.text.split('').forEach((e, i) => {
-          if (i % 70 == 0) {
-            result.push('\r\n');
-          }
+        props.text.split('').forEach((e, i) => {
+          if (i % 70 == 0) result.push('\r\n');
           result.push(e);
         });
         return result.join('');
-      },
-    },
-    mounted() {
-      this.triggerToast();
-    },
-    methods: {
-      triggerToast(): void {
-        this.timer = new Timer(() => {
-          this.hideToast();
-        }, this.delay);
-      },
-      hideToast(): void {
-        this.$nextTick(() => {
-          this.visible = false;
-          store.dispatch(TOAST_STORE.ACTIONS.REMOVE_TOAST, this.id);
+      });
+
+      const triggerToast = () => {
+        timer.value = new Timer(() => {
+          hideToast();
+        }, props.delay);
+      };
+
+      const hideToast = () => {
+        visible.value = false;
+        store.dispatch(TOAST_STORE.ACTIONS.REMOVE_TOAST, props.id);
+      };
+
+      const pauseToastHide = () => {
+        timer.value.pause();
+      };
+
+      const resumeToastHide = () => {
+        timer.value.resume();
+      };
+
+      onMounted(() => {
+        nextTick(() => {
+          triggerToast();
         });
-      },
-      pauseToastHide(): void {
-        this.timer.pause();
-      },
-      resumeToastHide(): void {
-        this.timer.resume();
-      },
+      });
+
+      onUnmounted(() => {
+        nextTick(() => {
+          hideToast();
+        });
+      });
+
+      return {
+        visible,
+        info,
+        success,
+        warning,
+        error,
+        isVisible,
+        titleColor,
+        messageLength,
+        processedMessage,
+        triggerToast,
+        hideToast,
+        pauseToastHide,
+        resumeToastHide,
+      };
     },
   });
 </script>

@@ -6,3 +6,8 @@ export interface ICreateUserDTO {
   email: string;
   password: string;
 }
+
+export interface ILoginDTO {
+  email: string;
+  password: string;
+}

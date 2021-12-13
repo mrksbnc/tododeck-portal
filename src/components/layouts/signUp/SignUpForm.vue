@@ -91,7 +91,6 @@
 
       const isValidPassword = computed(() => {
         if (userData.value.password === null) return true;
-        console.log(validatePassword(userData.value.password));
         return validatePassword(userData.value.password);
       });
 
@@ -128,9 +127,9 @@
 
       async function signUp() {
         if (!isFormValid.value) {
-          notificationFunctions.errorAlert({
-            title: 'Validation failed!',
-            text: 'please fill out all required fields!',
+          notificationFunctions.warningAlert({
+            title: 'Invalid form!',
+            text: 'Please fill out all required fields!',
           });
           invalidForm.value = true;
           return;

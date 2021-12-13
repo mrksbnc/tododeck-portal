@@ -1,6 +1,8 @@
 <template>
-  <div v-if="visible" ref="modalBackdrop" class="absolute inset-0 opacity-25 z-40 bg-black" />
-  <transition name="fade">
+  <transition name="ease-out-overlay">
+    <div v-if="visible" ref="modalBackdrop" class="absolute inset-0 opacity-25 z-40 bg-black" />
+  </transition>
+  <transition name="ease-out-modal">
     <div
       v-if="visible"
       ref="baseModal"
@@ -28,7 +30,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, ref } from 'vue';
 
   export default defineComponent({
     name: 'BaseModal',
@@ -42,15 +44,13 @@
         required: true,
       },
     },
-    data: () => {
-      return {
-        visible: true,
+    setup() {
+      const visible = ref(true);
+      const closeModal = () => {
+        visible.value = false;
       };
-    },
-    methods: {
-      closeModal() {
-        this.visible = false;
-      },
+
+      return { visible, closeModal };
     },
   });
 </script>

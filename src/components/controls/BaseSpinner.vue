@@ -11,5 +11,3 @@
     name: 'BaseSpinner',
   });
 </script>
-
-<style></style>

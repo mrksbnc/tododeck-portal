@@ -1,7 +1,7 @@
 'use strict';
 
 import config from '@/config';
-import { TokenFunctions } from '@/functions/tokenFunctions';
+import { getToken } from '@/utils/token';
 import axios, { AxiosRequestConfig } from 'axios';
 
 const axiosConfig: AxiosRequestConfig = {
@@ -13,9 +13,9 @@ const httpClient = axios.create(axiosConfig);
 httpClient.interceptors.request.use(
   (request: AxiosRequestConfig<unknown>) => {
     if (!request.url?.includes('login') && !request.url?.includes('register')) {
-      const token = TokenFunctions.getToken();
+      const token = getToken();
       if (!token) throw new Error('Token not found');
-      if (request.headers) request.headers['Authorization'] = `Bearer ${token}`;
+      if (request.headers) request.headers['authorization'] = `Bearer ${token}`;
     }
     return request;
   },
