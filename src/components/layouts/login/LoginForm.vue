@@ -47,6 +47,9 @@
   import notificationFunctions from '@/functions/notificationFunctions';
   import { computed, defineComponent, ref, nextTick } from '@vue/runtime-core';
   import { setToken } from '@/utils/token';
+  import { AxiosError } from 'axios';
+  import { ILoginResponseDTO } from '@/types/dto';
+  import HttpStatusCodeEnum from '@/data/constants/httpStatusCodeEnum';
 
   export default defineComponent({
     name: 'LoginForm',
@@ -113,8 +116,18 @@
           setToken(token.split(' ')[1]);
           router.push({ path: '/dashboard', name: 'Dashboard' });
         } catch (error) {
-          console.error(error);
-          notificationFunctions.errorAlert({ title: 'Server error', text: 'Something went wrong' });
+          const axiosError = error as AxiosError;
+          if (axiosError.response?.status === HttpStatusCodeEnum.NOT_FOUND) {
+            notificationFunctions.errorAlert({
+              title: 'Invalid credentials!',
+              text: 'Incorrect e-mail or password',
+            });
+          } else {
+            notificationFunctions.errorAlert({
+              title: 'Internal error!',
+              text: 'Something went wrong',
+            });
+          }
         } finally {
           isLoading.value = setLoading();
         }

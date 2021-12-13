@@ -68,6 +68,8 @@
   import { validateEmail, validatePassword } from '@/utils/validators';
   import notificationFunctions from '@/functions/notificationFunctions';
   import { defineComponent, ref, computed, nextTick } from '@vue/runtime-core';
+  import HttpStatusCodeEnum from '@/data/constants/httpStatusCodeEnum';
+  import { AxiosError } from 'axios';
 
   export default defineComponent({
     name: 'SignUpForm',
@@ -153,10 +155,21 @@
           emit('changeComponent', { component: AuthComponents.LOGIN });
           notificationFunctions.successAlert({
             title: 'Success',
-            text: 'sign up was successfull!',
+            text: 'Sign up was successfull!',
           });
         } catch (error) {
-          notificationFunctions.errorAlert({ title: 'Error', text: 'Something went wrong' });
+          const axiosError = error as AxiosError;
+          if (axiosError.response?.status === HttpStatusCodeEnum.CONFLICT) {
+            notificationFunctions.errorAlert({
+              title: 'Conflict!',
+              text: 'User with given email already exists!',
+            });
+          } else {
+            notificationFunctions.errorAlert({
+              title: 'Internal error!',
+              text: 'Something went wrong',
+            });
+          }
         } finally {
           isLoading.value = setLoading();
         }
