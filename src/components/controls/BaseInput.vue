@@ -73,8 +73,10 @@
 
       const cssClasses = computed(() => {
         return {
-          'border border-gray-300 focus:border-gray-700': props.bordered === true,
-          'border bg-gray-200 focus:bg-white focus:border-gray-600': props.bordered === false,
+          'border border-gray-300 focus:border-gray-700':
+            props.bordered === true && !props.hasError,
+          'border bg-gray-200 focus:bg-white focus:border-gray-600':
+            props.bordered === false && !props.hasError,
         };
       });
 

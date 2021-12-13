@@ -9,8 +9,9 @@
         <BaseInput
           v-model="userData.email"
           class="my-2"
+          type="email"
           label="E-mail"
-          :bordered="false"
+          :bordered="true"
           :hasError="invalidForm || !isValidEmail"
         />
         <BaseInput

@@ -23,26 +23,11 @@
               </div>
             </div>
             <div class="h-1/5 flex flex-col justify-end">
-              <label v-if="isSignUp" class="text-base font-light font-mono text-white">
-                Already have an account?
-              </label>
-              <label v-else class="text-base font-light font-mono text-white">
-                Not a member yet?
-              </label>
-              <span
-                v-if="isSignUp"
-                class="cursor-pointer hover:text-teal-300 text-lg w-1/3 font-semibold text-white font-mono"
-                @click="changeActiveComponent()"
-              >
-                Sign in
-              </span>
-              <span
-                v-else
-                class="cursor-pointer hover:text-teal-300 text-lg w-1/3 font-semibold text-white font-mono"
-                @click="changeActiveComponent()"
-              >
-                Sign up
-              </span>
+              <component
+                :is="activeMessageComponent"
+                :key="forceRenderKey"
+                @changeComponent="changeComponent"
+              />
             </div>
           </div>
         </div>
@@ -67,18 +52,20 @@
     name: 'LoginView',
     setup() {
       const forceRenderKey = ref(0);
-      const selectedComponent = ref(AuthComponents.SIGN_UP);
+      const selectedComponent = ref(AuthComponents.LOGIN);
 
       const activeComponent = computed(() => {
         return selectedComponent.value;
       });
 
-      const isSignUp = activeComponent.value === AuthComponents.SIGN_UP;
+      const activeMessageComponent = computed(() => {
+        return selectedComponent.value === AuthComponents.LOGIN ? 'SignUpMessage' : 'LoginMessage';
+      });
 
       function changeActiveComponent() {
-        if (selectedComponent.value == AuthComponents.SIGN_UP)
-          selectedComponent.value = AuthComponents.LOGIN;
-        else selectedComponent.value = AuthComponents.SIGN_UP;
+        if (selectedComponent.value == AuthComponents.LOGIN)
+          selectedComponent.value = AuthComponents.SIGN_UP;
+        else selectedComponent.value = AuthComponents.LOGIN;
 
         nextTick(() => {
           ++forceRenderKey.value;
@@ -89,7 +76,13 @@
         changeActiveComponent();
       }
 
-      return { forceRenderKey, activeComponent, isSignUp, changeActiveComponent, changeComponent };
+      return {
+        forceRenderKey,
+        activeComponent,
+        activeMessageComponent,
+        changeActiveComponent,
+        changeComponent,
+      };
     },
   });
 </script>

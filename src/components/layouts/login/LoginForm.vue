@@ -6,8 +6,8 @@
         <p class="font-sans">Sign in</p>
       </div>
       <div class="w-3/4 flex flex-col items-center">
-        <BaseInput class="my-2" placeholder="First name" :bordered="true" />
-        <BaseInput class="my-2" placeholder="Last name" :bordered="true" />
+        <BaseInput class="my-2" label="E-mail" type="email" :bordered="true" />
+        <BaseInput class="my-2" label="Password" type="password" :bordered="true" />
       </div>
       <div class="text-center mt-10">
         <button
