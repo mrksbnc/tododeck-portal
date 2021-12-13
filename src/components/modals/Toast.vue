@@ -1,19 +1,23 @@
 <template>
-  <transition name="fade">
+  <transition name="ease-out-modal" leave-active-class="duration-300">
     <div
-      :key="id"
       v-if="visible"
-      @mouseover="pauseToastHide"
-      @mouseout="resumeToastHide"
-      class="flex relative w-full h-16 max-w-sm mx-auto overflow-hidden right-0 bg-white mr-2 mt-1 mb-1 rounded-lg shadow-md dark:bg-gray-800 my-5 top-0 z-50 toaster cursor-pointer"
+      :key="id"
+      :class="[
+        { 'h-16': messageLength < 80, 'h-18': messageLength > 80 },
+        'flex pointer-events-auto relative w-full max-w-sm mx-auto overflow-hidden right-0 bg-white my-1 rounded-lg shadow-md dark:bg-gray-800 top-0 z-50 toaster cursor-pointer',
+      ]"
+      @mouseover="pauseToastHide()"
+      @mouseout="resumeToastHide()"
     >
       <span
-        class="absolute text-gray-500 right-1 top-1 mr-2 cursor-pointer hover:text-red-500"
+        class="absolute flex text-gray-500 h-full right-0 pr-2 ml-2 cursor-pointer hover:text-red-500 p-1 hover:bg-gray-500"
         @click="hideToast()"
       >
-        <i class="fas fa-times text-xs"></i>
+        <i class="fas fa-times text-xs self-center" />
       </span>
-      <div class="flex items-center justify-center w-12 bg-green-500" v-if="success">
+
+      <div v-if="success" class="flex items-center justify-center w-12 bg-green-500">
         <svg
           class="w-6 h-6 text-white fill-current"
           viewBox="0 0 40 40"
@@ -24,7 +28,7 @@
           />
         </svg>
       </div>
-      <div class="flex items-center justify-center w-12 bg-blue-500" v-if="info">
+      <div v-if="info" class="flex items-center justify-center w-12 bg-blue-500">
         <svg
           class="w-6 h-6 text-white fill-current"
           viewBox="0 0 40 40"
@@ -35,7 +39,7 @@
           />
         </svg>
       </div>
-      <div class="flex items-center justify-center w-12 bg-yellow-400" v-if="warning">
+      <div v-if="warning" class="flex items-center justify-center w-12 bg-yellow-400">
         <svg
           class="w-6 h-6 text-white fill-current"
           viewBox="0 0 40 40"
@@ -46,7 +50,7 @@
           />
         </svg>
       </div>
-      <div class="flex items-center justify-center w-12 bg-red-600" v-if="error">
+      <div v-if="error" class="flex items-center justify-center w-12 bg-red-600">
         <svg
           class="w-6 h-6 text-white fill-current"
           viewBox="0 0 40 40"
@@ -57,10 +61,12 @@
           />
         </svg>
       </div>
-      <div class="px-4 py-3 -mx-3">
-        <div class="mx-3">
+      <div class="px-4 py-3">
+        <div class="mb-2 w-7/8">
           <span :class="titleColor" class="font-semibold">{{ title }}</span>
-          <p class="text-sm text-gray-600 dark:text-gray-200">{{ text }}</p>
+          <p class="text-xs text-gray-600 dark:text-gray-200 text-left">
+            {{ processedMessage }}
+          </p>
         </div>
       </div>
     </div>
@@ -68,66 +74,69 @@
 </template>
 
 <script lang="ts">
+  import {
+    ref,
+    computed,
+    nextTick,
+    onMounted,
+    onUnmounted,
+    defineComponent,
+  } from '@vue/runtime-core';
   import store from '@/store';
   import Timer from '@/utils/timer';
-  import { defineComponent } from '@vue/runtime-core';
   import ToastVariants from '@/data/enums/toastVariants';
   import { TOAST_STORE } from '@/data/constants/vuexConstants';
 
   export default defineComponent({
-    name: 'Toast',
-    data: () => {
-      return {
-        timer: new Timer(() => {}, 0),
-        visible: true,
-      };
-    },
-    mounted() {
-      this.triggerToast();
-    },
-    methods: {
-      triggerToast(): void {
-        this.timer = new Timer(() => {
-          this.hideToast();
-        }, this.delay);
+    name: 'BaseToast',
+    props: {
+      id: {
+        type: Number,
+        required: true,
       },
-      hideToast(): void {
-        this.visible = false;
-        store.dispatch(TOAST_STORE.ACTIONS.REMOVE_TOAST, this.id);
+      title: {
+        type: String,
+        default: 'Title',
       },
-      pauseToastHide(): void {
-        this.timer.pause();
+      text: {
+        type: String,
+        default: 'text',
       },
-      resumeToastHide(): void {
-        this.timer.resume();
+      variant: {
+        type: String,
+        default: ToastVariants.INFO,
+      },
+      delay: {
+        type: Number,
+        default: 2500,
       },
     },
-    computed: {
-      success: function (): boolean {
-        return this.variant == ToastVariants.SUCCESS;
-      },
-      info: function (): boolean {
-        return this.variant == ToastVariants.INFO;
-      },
-      warning: function (): boolean {
-        return this.variant == ToastVariants.WARNING;
-      },
-      error: function (): boolean {
-        return this.variant == ToastVariants.ERROR;
-      },
-      currentState: function (): ToastVariants {
-        let state = ToastVariants.INFO;
-        if (this.info) state = ToastVariants.INFO;
-        if (this.error) state = ToastVariants.ERROR;
-        if (this.success) state = ToastVariants.SUCCESS;
-        if (this.warning) state = ToastVariants.WARNING;
-        return state;
-      },
-      isVisible: function (): boolean {
-        return this.visible;
-      },
-      titleColor: function (): string {
-        switch (this.currentState) {
+    setup(props) {
+      const timer = ref(new Timer(() => {}, 0));
+      const visible = ref(true);
+
+      const success = computed(() => {
+        return props.variant === ToastVariants.SUCCESS;
+      });
+
+      const info = computed(() => {
+        return props.variant === ToastVariants.INFO;
+      });
+
+      const warning = computed(() => {
+        return props.variant === ToastVariants.WARNING;
+      });
+
+      const error = computed(() => {
+        return props.variant === ToastVariants.ERROR;
+      });
+
+      const isVisible = computed(() => {
+        return visible.value;
+      });
+
+      const titleColor = computed(() => {
+        switch (props.variant) {
           case ToastVariants.SUCCESS:
             return 'text-green-500 dark:text-green-400';
           case ToastVariants.INFO:
@@ -139,27 +148,67 @@
           default:
             return 'text-blue-500 dark:text-blue-400';
         }
-      },
-    },
-    props: {
-      id: {
-        type: Number,
-      },
-      title: {
-        type: String,
-        default: 'Title',
-      },
-      text: {
-        type: String,
-        default: 'text',
-      },
-      variant: {
-        default: ToastVariants.INFO,
-      },
-      delay: {
-        type: Number,
-        default: 2500,
-      },
+      });
+
+      const messageLength = computed(() => {
+        return props.text.length;
+      });
+
+      const processedMessage = computed(() => {
+        let result: string[] = [];
+        props.text.split('').forEach((e, i) => {
+          if (i % 70 == 0) result.push('\r\n');
+          result.push(e);
+        });
+        return result.join('');
+      });
+
+      const triggerToast = () => {
+        timer.value = new Timer(() => {
+          hideToast();
+        }, props.delay);
+      };
+
+      const hideToast = () => {
+        visible.value = false;
+        store.dispatch(TOAST_STORE.ACTIONS.REMOVE_TOAST, props.id);
+      };
+
+      const pauseToastHide = () => {
+        timer.value.pause();
+      };
+
+      const resumeToastHide = () => {
+        timer.value.resume();
+      };
+
+      onMounted(() => {
+        nextTick(() => {
+          triggerToast();
+        });
+      });
+
+      onUnmounted(() => {
+        nextTick(() => {
+          hideToast();
+        });
+      });
+
+      return {
+        visible,
+        info,
+        success,
+        warning,
+        error,
+        isVisible,
+        titleColor,
+        messageLength,
+        processedMessage,
+        triggerToast,
+        hideToast,
+        pauseToastHide,
+        resumeToastHide,
+      };
     },
   });
 </script>

@@ -10,7 +10,6 @@ export const componentNameCollection = Object.entries(components).map(([path]) =
     ?.replace(/\.\w+$/, '') as string;
 });
 
-console.log(componentNameCollection);
 export function registerComponents(app: App): void {
   Object.entries(components).forEach(([path, definition]) => {
     const componentName = path

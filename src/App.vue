@@ -1,15 +1,15 @@
 <template>
-  <ToasterContainer ref="toaster-container" />
+  <ToasterContainer ref="v-toast-container" />
   <router-view ref="layout" v-slot="{ Component }">
     <component :is="Component" />
   </router-view>
-  <ModalContainer ref="modal-container" />
+  <ModalContainer ref="v-modal-container" />
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/runtime-core';
+  import { defineComponent } from '@vue/runtime-core';
 
-export default defineComponent({
-  name: 'App',
-});
+  export default defineComponent({
+    name: 'App',
+  });
 </script>

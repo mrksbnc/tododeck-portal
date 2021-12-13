@@ -1,5 +1,8 @@
 'use strict';
 
-enum Endpoints {}
+enum ApiRoutes {
+  REGISTER = '/auth/register',
+  LOGIN = 'auth/login',
+}
 
-export default Endpoints;
+export default ApiRoutes;

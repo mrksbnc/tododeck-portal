@@ -28,8 +28,9 @@ const mutations: MutationTree<ToastStateTypes> & ToastMutationsTypes = {
     state.toasts.push(payload);
   },
   [TOAST_STORE.MUTATIONS.REMOVE_TOAST]: (state: ToastStateTypes, payload: number) => {
-    const filtered = state.toasts.filter((f) => f.id != payload);
-    state.toasts = filtered;
+    return state.toasts.forEach((e, i) => {
+      if (e.id === payload) state.toasts.slice(i, 1);
+    });
   },
   [TOAST_STORE.MUTATIONS.SET_ROOT_DISPATCH]: (state: ToastStateTypes, payload: boolean) => {
     state.rootDispatch = payload;
