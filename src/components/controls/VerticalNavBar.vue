@@ -40,7 +40,7 @@
             <i class="fa fa-cog mr-2" />
             <span class="w-full"> Settings </span>
           </div>
-          <div class="text-gray-500 my-2 hover:text-gray-800">
+          <div class="text-gray-500 my-2 hover:text-gray-800" @click="logout()">
             <i class="fas fa-sign-out-alt mr-2" />
             <span class="w-full"> Logout </span>
           </div>
@@ -51,19 +51,19 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from '@vue/runtime-core';
-  import { menuCollection } from '@/data/constants/menuCollection';
-  import { systemMenuCollection } from '@/data/constants/systemMenuCollection';
+  import { deleteToken } from '../../utils/token';
+  import { defineComponent } from '@vue/runtime-core';
+  import router from '@/router';
 
   export default defineComponent({
     name: 'VerticalNavBar',
     setup() {
-      const navBarMenuElements = ref(menuCollection);
-      const systemMenuElements = ref(systemMenuCollection);
+      const logout = () => {
+        deleteToken();
+        router.push('/');
+      };
 
-      const isActive = ref(Number(navBarMenuElements.value[0]?.id) || undefined);
-
-      return { navBarMenuElements, systemMenuElements, isActive };
+      return { logout };
     },
   });
 </script>
