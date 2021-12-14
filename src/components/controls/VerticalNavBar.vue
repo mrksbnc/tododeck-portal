@@ -51,17 +51,32 @@
 </template>
 
 <script lang="ts">
+  import router from '@/router';
   import { deleteToken } from '../../utils/token';
   import { defineComponent } from '@vue/runtime-core';
-  import router from '@/router';
 
   export default defineComponent({
     name: 'VerticalNavBar',
-    setup() {
-      const logout = () => {
+    emits: ['changeMenu'],
+    setup(props, { emit }) {
+      function overview() {
+        emit('changeMenu');
+      }
+
+      function statistics() {
+        //
+      }
+
+      function collections() {
+        //
+      }
+
+      function calendar() {}
+
+      function logout() {
         deleteToken();
         router.push('/');
-      };
+      }
 
       return { logout };
     },
