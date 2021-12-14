@@ -1,36 +1,40 @@
 'use strict';
 
 const verticalNavbarMenus = Object.freeze({
-  overview: {
-    componentName: '',
-    icon: 'fas fa-home',
-    name: 'Overview',
-  },
-  stats: {
-    componentName: '',
-    icon: 'fas fa-chart-pie',
-    name: 'Stats',
-  },
-  collections: {
-    componentName: '',
-    icon: 'fas fa-folder-open',
-    name: 'Collections',
-  },
-  calendar: {
-    componentName: '',
-    icon: 'far fa-calendar-alt',
-    name: 'Calendar',
-  },
-  settings: {
-    componentName: '',
-    icon: 'fas fa-cog',
-    name: 'Settings',
-  },
-  logout: {
-    componentName: '',
-    icon: 'fas fa-sign-out-alt',
-    name: 'Logout',
-  },
+  feature: [
+    {
+      componentName: '',
+      icon: 'fas fa-home',
+      name: 'Overview',
+    },
+    {
+      componentName: '',
+      icon: 'fas fa-chart-pie',
+      name: 'Statistic',
+    },
+    {
+      componentName: '',
+      icon: 'fas fa-folder-open',
+      name: 'Collections',
+    },
+    {
+      componentName: '',
+      icon: 'far fa-calendar-alt',
+      name: 'Calendar',
+    },
+  ],
+  system: [
+    {
+      componentName: '',
+      icon: 'fas fa-cog',
+      name: 'Settings',
+    },
+    {
+      componentName: '',
+      icon: 'fas fa-sign-out-alt',
+      name: 'Logout',
+    },
+  ],
 });
 
 export default verticalNavbarMenus;
