@@ -2,14 +2,14 @@
 
 import ToastVariants from '@/data/enums/toastVariants';
 
-export interface ToastPropModel {
+export type ToastPropModel = {
   id: number;
   title: string;
   text: string;
   variant: ToastVariants;
-}
+};
 
-export interface ModalPropModel {
+export type ModalPropModel = {
   uid: string;
   name: string;
-}
+};

@@ -1,49 +1,37 @@
 <template>
   <div
-    class="bg-slate-200 flex flex-col w-full h-full text-white flex items-center rounded-tr-xl rounded-br-xl"
+    class="bg-slate-200 flex flex-col w-1/6 h-full text-gray-500 items-center rounded-tr-xl rounded-br-xl"
   >
     <div class="h-1/6 w-full rounded-tr-lg text-center pt-4">
       <span class="text-mono text-gray-800 font-bold text-lg"> .tododeck </span>
     </div>
-    <div class="h-3/6 w-full rounded-tr-lg text-center pt-4">
-      <div class="w-full text-gray-500 d-flex my-2">
-        <div
-          class="h-full w-full my-4 cursor-pointer flex flex-col items-center justify-center hover:text-gray-800"
+    <div class="h-3/6 w-full rounded-tr-lg text-center flex justify-center">
+      <ul class="list-none text-left">
+        <li
+          v-for="(menu, id) in featureMenu"
+          :key="id"
+          class="block cursor-pointer hover:text-gray-800 pt-3 pb-3"
+          @click="clickEventHandler(menu.id, menu.module)"
         >
-          <i class="fas fa-home mr-2" />
-          <span class="my-2 w-full"> Overview </span>
-        </div>
-        <div
-          class="h-full w-full my-4 cursor-pointer flex flex-col items-center justify-center hover:text-gray-800"
-        >
-          <i class="fas fa-chart-pie mr-2" />
-          <span class="my-2 w-full"> Statistics </span>
-        </div>
-        <div
-          class="h-full w-full my-4 cursor-pointer flex flex-col items-center justify-center hover:text-gray-800"
-        >
-          <i class="fas fa-folder-open mr-2" />
-          <span class="my-2 w-full"> Collections </span>
-        </div>
-        <div
-          class="h-full w-full my-4 cursor-pointer flex flex-col items-center justify-center hover:text-gray-800"
-        >
-          <i class="far fa-calendar-alt mr-2" />
-          <span class="my-2 w-full"> Calendar </span>
-        </div>
-      </div>
+          <i :class="menu.icon" />
+          <span class="ml-3"> {{ menu.name }} </span>
+        </li>
+      </ul>
     </div>
     <div class="h-2/6 w-full h-full flex flex-col items-center rounded-br-lg">
       <div class="h-full w-full flex flex-col items-center content-center">
         <div class="h-full w-full flex flex-col my-4 cursor-pointer items-center justify-end">
-          <div class="text-gray-500 my-2 hover:text-gray-800">
-            <i class="fa fa-cog mr-2" />
-            <span class="w-full"> Settings </span>
-          </div>
-          <div class="text-gray-500 my-2 hover:text-gray-800" @click="logout()">
-            <i class="fas fa-sign-out-alt mr-2" />
-            <span class="w-full"> Logout </span>
-          </div>
+          <ul class="list-none text-left">
+            <li
+              v-for="(menu, id) in systemMenu"
+              :key="id"
+              class="block cursor-pointer hover:text-gray-800 mt-2"
+              @click="clickEventHandler(menu.id, menu.module)"
+            >
+              <i :class="menu.icon" />
+              <span class="ml-3"> {{ menu.name }} </span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -52,33 +40,34 @@
 
 <script lang="ts">
   import router from '@/router';
+  import { MenuModul } from '@/types/menu';
   import { deleteToken } from '../../utils/token';
-  import { defineComponent } from '@vue/runtime-core';
+  import MenuModuls from '@/data/enums/menuModules';
+  import SystemMenuIds from '@/data/enums/systemMenuIds';
+  import { defineComponent, ref } from '@vue/runtime-core';
+  import verticalMenuCollection from '@/data/verticalMenuCollection';
 
   export default defineComponent({
     name: 'VerticalNavBar',
-    emits: ['changeMenu'],
+    emits: {
+      changeMenu: ({ id, module }: { id: number; module: MenuModul }) => {
+        return { id, module };
+      },
+    },
     setup(props, { emit }) {
-      function overview() {
-        emit('changeMenu');
+      const systemMenu = ref(verticalMenuCollection.system);
+      const featureMenu = ref(verticalMenuCollection.feature);
+
+      function clickEventHandler(id: number, module: MenuModul) {
+        if (module === MenuModuls.SYSTEM && id == SystemMenuIds.SIGN_OUT) {
+          deleteToken();
+          router.push('/');
+          return;
+        }
+        emit('changeMenu', { id, module });
       }
 
-      function statistics() {
-        //
-      }
-
-      function collections() {
-        //
-      }
-
-      function calendar() {}
-
-      function logout() {
-        deleteToken();
-        router.push('/');
-      }
-
-      return { logout };
+      return { systemMenu, featureMenu, clickEventHandler };
     },
   });
 </script>

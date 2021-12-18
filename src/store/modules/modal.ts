@@ -7,7 +7,7 @@ import {
   ModalActionsTypes,
   ModalMutationsTypes,
 } from '@/types/interfaces/store';
-import { ModalPropModel } from '@/types/interfaces/models';
+import { ModalPropModel } from '@/types/models';
 import { MODAL_STORE } from '@/data/constants/vuexConstants';
 import { GetterTree, MutationTree, ActionTree, Module } from 'vuex';
 

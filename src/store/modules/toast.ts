@@ -7,7 +7,7 @@ import {
   ToastGettersTypes,
   ToastMutationsTypes,
 } from '@/types/interfaces/store';
-import { ToastPropModel } from '@/types/interfaces/models';
+import { ToastPropModel } from '@/types/models';
 import { TOAST_STORE } from '@/data/constants/vuexConstants';
 import { ActionTree, GetterTree, Module, MutationTree } from 'vuex';
 

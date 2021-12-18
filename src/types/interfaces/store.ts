@@ -5,7 +5,7 @@ import {
   AugmentedModalActionContext,
   AugmentedToastActionContext,
 } from '../vuex/actions';
-import { ModalPropModel, ToastPropModel } from './models';
+import { ModalPropModel, ToastPropModel } from '../models';
 import { MODAL_STORE, ROOT_STORE, TOAST_STORE } from '@/data/constants/vuexConstants';
 
 //#region *********************** STORE TYPES  ***********************/
