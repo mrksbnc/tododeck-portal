@@ -1,11 +1,11 @@
 <template>
   <div
-    class="bg-slate-200 flex flex-col w-1/6 h-full text-gray-500 items-center rounded-tr-xl rounded-br-xl"
+    class="bg-slate-200 flex flex-col w-60 h-full text-gray-500 items-center rounded-tr-xl rounded-br-xl"
   >
     <div class="h-1/6 w-full rounded-tr-lg text-center pt-4">
       <span class="text-mono text-gray-800 font-bold text-lg"> .tododeck </span>
     </div>
-    <div class="h-3/6 w-full rounded-tr-lg text-center flex justify-center">
+    <div class="h-3/6 w-full flex rounded-tr-lg text-center justify-center">
       <ul class="list-none text-left">
         <li
           v-for="(menu, id) in featureMenu"
@@ -25,7 +25,7 @@
             <li
               v-for="(menu, id) in systemMenu"
               :key="id"
-              class="block cursor-pointer hover:text-gray-800 mt-2"
+              class="block cursor-pointer hover:text-gray-800 pt-3"
               @click="clickEventHandler(menu.id, menu.module)"
             >
               <i :class="menu.icon" />
@@ -43,6 +43,7 @@
   import { MenuModul } from '@/types/menu';
   import { deleteToken } from '../../utils/token';
   import MenuModuls from '@/data/enums/menuModules';
+  import emitCollection from '@/data/emitCollection';
   import SystemMenuIds from '@/data/enums/systemMenuIds';
   import { defineComponent, ref } from '@vue/runtime-core';
   import verticalMenuCollection from '@/data/verticalMenuCollection';
@@ -50,18 +51,20 @@
   export default defineComponent({
     name: 'VerticalNavBar',
     emits: {
-      changeMenu: ({ id, module }: { id: number; module: MenuModul }) => {
-        return { id, module };
-      },
+      changeMenu: emitCollection.changeMenu,
     },
     setup(props, { emit }) {
       const systemMenu = ref(verticalMenuCollection.system);
       const featureMenu = ref(verticalMenuCollection.feature);
 
+      function signOut() {
+        deleteToken();
+        router.push('/');
+      }
+
       function clickEventHandler(id: number, module: MenuModul) {
         if (module === MenuModuls.SYSTEM && id == SystemMenuIds.SIGN_OUT) {
-          deleteToken();
-          router.push('/');
+          signOut();
           return;
         }
         emit('changeMenu', { id, module });

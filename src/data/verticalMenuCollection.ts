@@ -30,7 +30,7 @@ const verticalMenuCollection: VerticalMenuCollectionType = Object.freeze({
     },
     {
       componentName: '',
-      icon: 'fas fa-clipboard-list',
+      icon: 'fas fa-tasks',
       name: 'Todos',
       id: VerticalMenuIds.TODO,
       module: MenuModuls.FEATURE,
