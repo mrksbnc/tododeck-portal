@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-slate-200 flex flex-col w-60 h-full text-gray-500 items-center rounded-tr-xl rounded-br-xl"
+    class="bg-slate-300 flex flex-col w-60 h-full text-gray-500 items-center rounded-tr-xl rounded-br-xl"
   >
     <div class="h-1/6 w-full rounded-tr-lg text-center pt-4">
       <span class="text-mono text-gray-800 font-bold text-lg"> .tododeck </span>
@@ -46,12 +46,12 @@
   import emitCollection from '@/data/emitCollection';
   import SystemMenuIds from '@/data/enums/systemMenuIds';
   import { defineComponent, ref } from '@vue/runtime-core';
-  import verticalMenuCollection from '@/data/verticalMenuCollection';
+  import verticalMenuCollection from '@/data/collections/verticalMenuCollection';
 
   export default defineComponent({
     name: 'VerticalNavBar',
     emits: {
-      changeMenu: emitCollection.changeMenu,
+      changeMenuView: emitCollection.changeMenuView,
     },
     setup(props, { emit }) {
       const systemMenu = ref(verticalMenuCollection.system);
@@ -63,11 +63,11 @@
       }
 
       function clickEventHandler(id: number, module: MenuModul) {
-        if (module === MenuModuls.SYSTEM && id == SystemMenuIds.SIGN_OUT) {
+        if (module === MenuModuls.SYSTEM && id === SystemMenuIds.SIGN_OUT) {
           signOut();
           return;
         }
-        emit('changeMenu', { id, module });
+        emit('changeMenuView', { id });
       }
 
       return { systemMenu, featureMenu, clickEventHandler };

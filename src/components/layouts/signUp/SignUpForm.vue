@@ -66,8 +66,8 @@
   import { ICreateUserDTO } from '@/types/dto';
   import apiService from '@/services/apiService';
   import AuthComponents from '@/data/enums/authComponents';
+  import HttpStatusCodeEnum from '@/data/enums/httpStatusCodeEnum';
   import { validateEmail, validatePassword } from '@/utils/validators';
-  import HttpStatusCodeEnum from '@/data/constants/httpStatusCodeEnum';
   import notificationFunctions from '@/functions/notificationFunctions';
   import { defineComponent, ref, computed, nextTick } from '@vue/runtime-core';
 

@@ -1,7 +1,7 @@
 'use strict';
 
 enum VerticalMenuIds {
-  OVERVIEW = 1,
+  HOME = 1,
   STATISTIC = 2,
   COLLECTION = 3,
   TODO = 4,

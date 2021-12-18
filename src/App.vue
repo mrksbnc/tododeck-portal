@@ -1,6 +1,6 @@
 <template>
   <ToasterContainer ref="v-toast-container" />
-  <router-view ref="layout" v-slot="{ Component }">
+  <router-view ref="layout" v-slot="{ Component }" class="absolute">
     <component :is="Component" />
   </router-view>
   <ModalContainer ref="v-modal-container" />

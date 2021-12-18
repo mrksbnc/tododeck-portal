@@ -1,8 +1,8 @@
 'use strict';
 
-import MenuModuls from './enums/menuModules';
-import SystemMenuIds from './enums/systemMenuIds';
-import VerticalMenuIds from './enums/verticalMenuIds';
+import MenuModuls from '../enums/menuModules';
+import SystemMenuIds from '../enums/systemMenuIds';
+import VerticalMenuIds from '../enums/verticalMenuIds';
 import { VerticalMenuCollectionType, MenuElement } from '@/types/menu';
 
 const verticalMenuCollection: VerticalMenuCollectionType = Object.freeze({
@@ -10,8 +10,8 @@ const verticalMenuCollection: VerticalMenuCollectionType = Object.freeze({
     {
       componentName: '',
       icon: 'fas fa-home',
-      name: 'Overview',
-      id: VerticalMenuIds.OVERVIEW,
+      name: 'Home',
+      id: VerticalMenuIds.HOME,
       module: MenuModuls.FEATURE,
     },
     {

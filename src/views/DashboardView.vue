@@ -1,17 +1,27 @@
 <template>
-  <div class="w-full h-full flex justify-center items-center bg-slate-100">
-    <VerticalNavBar class="w-1/5 h-full" />
-    <div class="w-1/4 bg-green-400"></div>
-    <div class="w-3/4 bg-black"></div>
+  <div class="w-full h-full flex flex-row bg-slate-100">
+    <VerticalNavBar class="w-1/5 h-full" @changeMenuView="changeActiveView" />
+    <div class="w-4/5 h-full bg-transparent">
+      <component :is="activeViewComponent" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from '@vue/runtime-core';
+  import DashboardComponents from '@/data/dashboardComponents';
+  import { defineComponent, ref } from '@vue/runtime-core';
 
   export default defineComponent({
     name: 'DashboardView',
+    setup() {
+      const defaultViewComponent = ref(DashboardComponents.HOME);
+      const activeViewComponent = ref(defaultViewComponent.value);
+
+      function changeActiveView({ id }: { id: number }) {
+        console.log(id);
+      }
+
+      return { activeViewComponent, changeActiveView };
+    },
   });
 </script>
-
-<style></style>

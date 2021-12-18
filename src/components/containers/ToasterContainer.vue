@@ -1,7 +1,7 @@
 <template>
   <div
     ref="v-toast-container"
-    class="container fixed inline-block flex-col inset-0 p-4 overflow-hidden max-w-sm pointer-events-none z-toast"
+    class="container bg-transparent h-full w-full flex-col inset-0 p-4 overflow-hidden max-w-sm pointer-events-none float-right"
   >
     <Toast
       v-for="(item, index) in toastStack"

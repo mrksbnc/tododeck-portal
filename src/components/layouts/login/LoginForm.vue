@@ -46,7 +46,7 @@
   import { setToken } from '@/utils/token';
   import apiService from '@/services/apiService';
   import { validateEmail } from '@/utils/validators';
-  import HttpStatusCodeEnum from '@/data/constants/httpStatusCodeEnum';
+  import HttpStatusCodeEnum from '@/data/enums/httpStatusCodeEnum';
   import notificationFunctions from '@/functions/notificationFunctions';
   import { computed, defineComponent, ref, nextTick } from '@vue/runtime-core';
 
