@@ -10,8 +10,6 @@ import { getToken, isTokenValid, parseJwt } from './utils/token';
 const Portal = createApp(App).use(store).use(router);
 registerComponents(Portal);
 
-Portal.mount('#app');
-
 async function init() {
   if (isTokenValid()) {
     const token = String(getToken());
@@ -19,6 +17,7 @@ async function init() {
 
     await apiService.getAppData(decodedToken.userId);
   }
+  Portal.mount('#app');
 }
 
 init();

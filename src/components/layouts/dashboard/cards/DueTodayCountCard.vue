@@ -2,7 +2,7 @@
   <LoadingCard v-if="isLoading" class="w-full h-full" />
   <div
     v-else
-    class="h-full w-full bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-xl flex font-bold text-white font-sans"
+    class="h-full w-full bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-xl flex font-bold text-white font-sans shadow-md"
   >
     <div class="h-full w-full items-center flex text-3xl pl-6">
       <span>Due today</span>
@@ -31,12 +31,12 @@
       const getDueTodayTodoCount = async () => {
         isLoading.value = true;
         try {
-          const count = await apiService.getProjectCount(userId.value);
+          const count = await apiService.getDueTodayTodoCount(userId.value);
           dueTodayTaskCount.value = count;
         } catch (error) {
           notificationFunctions.errorAlert({
             title: 'Something went wrong!',
-            text: "Project count couldn't be fetched from server",
+            text: "Due today todo count couldn't be fetched from server",
           });
         } finally {
           isLoading.value = false;

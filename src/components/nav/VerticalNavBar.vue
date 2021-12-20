@@ -1,6 +1,8 @@
 <template>
-  <div class="w-60 h-full pt-1 pb-1 pr-1">
-    <div class="bg-cyan-900 flex flex-col w-full h-full text-white items-center rounded-xl">
+  <div class="w-60 h-full pt-1 pr-1">
+    <div
+      class="bg-cyan-900 flex flex-col w-full h-full text-white items-center rounded-xl shadow-md"
+    >
       <div class="h-1/6 py-3 w-full rounded-tr-lg text-center mt-4 mb-5">
         <span class="font-bold text-lg mb-2">Welcome</span><br />
         <span class="text-sky-400 font-semibold">{{ nameOfUser }}</span>

@@ -2,7 +2,7 @@
   <LoadingCard v-if="isLoading" class="w-full h-full" />
   <div
     v-else
-    class="h-full w-full bg-gradient-to-tr from-yellow-400 to-amber-500 rounded-xl flex font-bold text-white font-sans"
+    class="h-full w-full bg-gradient-to-tr from-yellow-400 to-amber-500 rounded-xl flex font-bold text-white font-sans shadow-md"
   >
     <div class="h-full w-full items-center flex text-3xl pl-6">
       <span>Active projects</span>

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-300 rounded-xl animate-pulse h-full w-full"></div>
+  <div class="bg-gray-300 rounded-xl animate-pulse h-full w-full shadow-md"></div>
 </template>
 
 <script lang="ts">

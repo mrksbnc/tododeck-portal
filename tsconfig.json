@@ -9,7 +9,6 @@
     "importHelpers": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "types": ["vite/client"],
     "moduleResolution": "node",
     "paths": { "@/*": ["./src/*"] },
     "allowSyntheticDefaultImports": true,

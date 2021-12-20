@@ -13,7 +13,7 @@
     </div>
     <div class="w-full h-4/5 flex flex-row">
       <div class="w-1/2 h-full p-1">
-        <LoadingCard class="w-full" />
+        <ProjectsCard class="w-full h-full" />
       </div>
       <div class="w-1/2 h-full p-1">
         <LoadingCard class="w-full" />
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from '@vue/runtime-core';
+  import { defineComponent } from '@vue/runtime-core';
 
   export default defineComponent({
     name: 'HomeLayout',
