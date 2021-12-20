@@ -1,12 +1,12 @@
 'use strict';
 
-import { ModalPropModel, ToastPropModel, UserPropModel } from '../models';
-import { MODAL_STORE, TOAST_STORE, USER_STORE } from '@/data/constants/vuexConstants';
 import {
+  AugmentedUserActionContext,
   AugmentedModalActionContext,
   AugmentedToastActionContext,
-  AugmentedUserActionContext,
 } from '../vuex/actions';
+import { ModalPropModel, ToastPropModel, UserPropModel } from '../models';
+import { MODAL_STORE, TOAST_STORE, USER_STORE } from '@/data/constants/vuexConstants';
 
 //#region *********************** STORE TYPES  ***********************/
 export interface StoreActions extends ModalActionTypes, ToastActionTypes, UserActionTypes {}
@@ -20,31 +20,19 @@ export interface IRootState {
 //#endregion
 //#region *********************** MODAL MODULE TYPES  ***********************/
 export interface ModalStateTypes {
-  modals: ModalPropModel[];
+  modal: ModalPropModel | undefined;
 }
 
 export interface ModalGettersTypes {
-  [MODAL_STORE.GETTERS.GET_MODAL_STATUS](
-    state: ModalStateTypes,
-    payload: number
-  ): ModalPropModel | undefined;
-  [MODAL_STORE.GETTERS.GET_MODALS](state: ModalStateTypes): unknown[];
+  [MODAL_STORE.GETTERS.GET_MODAL](state: ModalStateTypes): ModalPropModel | undefined;
 }
 
 export type ModalMutationTypes<S = ModalStateTypes> = {
-  [MODAL_STORE.MUTATIONS.ADD_MODAL](state: S, payload: ModalPropModel): void;
-  [MODAL_STORE.MUTATIONS.REMOVE_MODAL](state: S, payload: number): void;
+  [MODAL_STORE.MUTATIONS.CLOSE_MODAL](state: S): void;
 };
 
 export interface ModalActionTypes {
-  [MODAL_STORE.ACTIONS.ADD_MODAL](
-    { commit }: AugmentedModalActionContext,
-    payload: ModalPropModel
-  ): void;
-  [MODAL_STORE.ACTIONS.REMOVE_MODAL](
-    { commit }: AugmentedModalActionContext,
-    payload: number
-  ): void;
+  [MODAL_STORE.ACTIONS.CLOSE_MODAL]({ commit }: AugmentedModalActionContext): void;
 }
 //#endregion
 //#region *********************** TOAST MODULE TYPES  ***********************/

@@ -36,8 +36,10 @@
     name: 'BaseModal',
     props: {
       id: {
-        type: Number,
-        required: true,
+        type: String,
+        default: () => {
+          return `modal_${+new Date()}_${Math.random()}`;
+        },
       },
       name: {
         type: String,

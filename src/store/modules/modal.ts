@@ -12,35 +12,30 @@ import { MODAL_STORE } from '@/data/constants/vuexConstants';
 import { GetterTree, MutationTree, ActionTree, Module } from 'vuex';
 
 const state: ModalStateTypes = {
-  modals: [],
+  modal: undefined,
 };
 
 const getters: GetterTree<ModalStateTypes, IRootState> & ModalGettersTypes = {
-  [MODAL_STORE.GETTERS.GET_MODAL_STATUS]: (state: ModalStateTypes, payload: number) => {
-    return state.modals.find((f) => f.id === payload);
-  },
-  [MODAL_STORE.GETTERS.GET_MODALS]: (state: ModalStateTypes) => {
-    return state.modals;
+  [MODAL_STORE.GETTERS.GET_MODAL]: (state: ModalStateTypes) => {
+    return state.modal;
   },
 };
 
 const mutations: MutationTree<ModalStateTypes> & ModalMutationTypes = {
-  [MODAL_STORE.MUTATIONS.ADD_MODAL]: (state: ModalStateTypes, payload: ModalPropModel) => {
-    payload.id = payload.id ? payload.id : payload.id + Date.now();
-    state.modals.push(payload);
+  [MODAL_STORE.MUTATIONS.OPEN_MODAL]: (state: ModalStateTypes, payload: ModalPropModel) => {
+    state.modal = payload;
   },
-  [MODAL_STORE.MUTATIONS.REMOVE_MODAL]: (state: ModalStateTypes, payload: number) => {
-    state.modals = [];
-    state.modals = state.modals.filter((f) => f.id !== payload);
+  [MODAL_STORE.MUTATIONS.CLOSE_MODAL]: (state: ModalStateTypes) => {
+    state.modal = undefined;
   },
 };
 
 const actions: ActionTree<ModalStateTypes, IRootState> & ModalActionTypes = {
-  [MODAL_STORE.ACTIONS.ADD_MODAL]: ({ commit }, payload: ModalPropModel): void => {
-    commit(MODAL_STORE.MUTATIONS.ADD_MODAL, payload);
+  [MODAL_STORE.ACTIONS.OPEN_MODAL]: ({ commit }, payload: ModalPropModel): void => {
+    commit(MODAL_STORE.MUTATIONS.OPEN_MODAL, payload);
   },
-  [MODAL_STORE.ACTIONS.REMOVE_MODAL]: ({ commit }, payload: number): void => {
-    commit(MODAL_STORE.MUTATIONS.REMOVE_MODAL, payload);
+  [MODAL_STORE.ACTIONS.CLOSE_MODAL]: ({ commit }): void => {
+    commit(MODAL_STORE.MUTATIONS.CLOSE_MODAL, undefined);
   },
 };
 

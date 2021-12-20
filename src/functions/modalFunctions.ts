@@ -15,7 +15,7 @@ class ModalFunctions {
       return;
     }
 
-    store.dispatch(MODAL_STORE.ACTIONS.ADD_MODAL, { name: componentName });
+    store.dispatch(MODAL_STORE.ACTIONS.OPEN_MODAL, { name: componentName });
   }
 }
 

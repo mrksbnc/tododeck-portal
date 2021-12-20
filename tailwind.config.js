@@ -3,8 +3,9 @@ module.exports = {
   theme: {
     extend: {
       zIndex: {
-        toast: '9010',
-        modal: '9000',
+        toast: '9999',
+        modal: '9998',
+        'modal-backdrop': '9997',
       },
       backgroundImage: {
         'liquid-marble': "url('./src/assets/images/liquid-marble.jpeg')",

@@ -13,20 +13,18 @@ export enum RootActions {
 }
 
 export enum ModalGetters {
-  GET_MODALS = 'GET_MODALS',
+  GET_MODAL = 'GET_MODAL',
   GET_MODAL_STATUS = 'GET_MODAL_STATUS',
 }
 
 export enum ModalMutations {
-  ADD_MODAL = 'ADD_MODAL',
-  REMOVE_MODAL = 'REMOVE_MODAL',
-  SET_MODAL_STATUS = 'SET_MODAL_STATUS',
+  OPEN_MODAL = 'OPEN_MODAL',
+  CLOSE_MODAL = 'CLOSE_MODAL',
 }
 
 export enum ModalActions {
-  ADD_MODAL = 'ADD_MODAL',
-  REMOVE_MODAL = 'REMOVE_MODAL',
-  SET_MODAL_STATUS = 'SET_MODAL_STATUS',
+  OPEN_MODAL = 'OPEN_MODAL',
+  CLOSE_MODAL = 'CLOSE_MODAL',
 }
 
 export enum ToastGetters {

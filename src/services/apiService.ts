@@ -77,7 +77,6 @@ class ApiService {
 
   public async getProjectsByUserId(userId: number): Promise<GetProjectDTO> {
     const response: GetProjectDTO = await httpClient.get(ApiRoutes.GET_PROJECTS + userId);
-    console.log(response);
     return response;
   }
 }
