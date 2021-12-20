@@ -4,7 +4,7 @@ import store from '@/store';
 import httpClient from '@/utils/httpClient';
 import ApiRoutes from '@/data/enums/endpoints';
 import { parseJwt, setToken } from '@/utils/token';
-import { ICreateUserDTO, ILoginDTO } from '@/types/dto';
+import { GetCountResponseDTO, ICreateUserDTO, ILoginDTO } from '@/types/dto';
 import { USER_STORE } from '@/data/constants/vuexConstants';
 import { GetAppDataResponseDTO, LoginResponseDTO } from '@/types/dto';
 
@@ -31,6 +31,40 @@ class ApiService {
     store.dispatch(USER_STORE.ACTIONS.SET_NAME, name);
     store.dispatch(USER_STORE.ACTIONS.ADD_USER, user);
   }
+
+  public async getProjectCount(projectId: number) {
+    const response: GetCountResponseDTO = await httpClient.get(
+      ApiRoutes.GET_PROJECT_COUNT + projectId
+    );
+    return response;
+  }
+
+  public async getTodoCount(userId: number) {
+    const response: GetCountResponseDTO = await httpClient.get(ApiRoutes.GET_TODO_COUNT + userId);
+    return response;
+  }
+
+  public async getTodoCountByListId(listId: number) {
+    const response: GetCountResponseDTO = await httpClient.get(
+      ApiRoutes.GET_TODO_COUNT_BY_LIST_ID + listId
+    );
+    return response;
+  }
+
+  public async getDueTodayTodoCount(userId: number) {
+    const response: GetCountResponseDTO = await httpClient.get(
+      ApiRoutes.GET_DUE_TODAY_COUNT + userId
+    );
+    return response;
+  }
+
+  public async getDueTodayTodoCountByListId(listId: number) {
+    const response: GetCountResponseDTO = await httpClient.get(
+      ApiRoutes.GET_DUE_TODAY_COUNT_BY_LIST_ID + listId
+    );
+    return response;
+  }
 }
 
-export default new ApiService();
+const instance = new ApiService();
+export { instance as apiService };

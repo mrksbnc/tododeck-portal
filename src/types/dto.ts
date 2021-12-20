@@ -17,3 +17,4 @@ export interface ILoginDTO {
 
 export type LoginResponseDTO = AxiosResponse<{ token: string }>;
 export type GetAppDataResponseDTO = AxiosResponse<{ user: PartialUser }>;
+export type GetCountResponseDTO = AxiosResponse<{ count: number }>;
