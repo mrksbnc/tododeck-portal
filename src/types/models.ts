@@ -13,3 +13,10 @@ export type ModalPropModel = {
   uid: string;
   name: string;
 };
+
+export type UserPropModel = {
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+};

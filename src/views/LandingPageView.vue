@@ -2,7 +2,7 @@
   <div class="w-full h-full flex justify-center items-center bg-teal-600">
     <div class="container mx-auto w-4/5 h-5/6 rounded-lg bg-white flex flex-row">
       <div
-        class="flex justify-center h-full items-center w-1/2 bg-white rounded-lg bg-cover bg-liquid-marble"
+        class="flex justify-center h-full items-center w-1/2 bg-white rounded-lg bg-cover bg-liquid-marble sm:hidden md:flex"
       >
         <div
           class="flex flex-col w-5/6 h-5/6 p-5 rounded-xl bg-opacity-40 backdrop-filter backdrop-blur-lg"
@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-      <div class="w-1/2 h-full">
+      <div class="h-full sm:w-full md:w-1/2">
         <component
           :is="activeComponent"
           :key="forceRenderKey"

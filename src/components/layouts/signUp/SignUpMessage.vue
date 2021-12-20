@@ -9,8 +9,8 @@
 </template>
 
 <script lang="ts">
-  import emitCollection from '@/data/emitCollection';
   import { defineComponent } from '@vue/runtime-core';
+  import emitCollection from '@/data/constants/emitCollection';
 
   export default defineComponent({
     name: 'SignUpMessage',

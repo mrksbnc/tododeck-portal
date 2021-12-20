@@ -43,7 +43,6 @@
   import router from '@/router';
   import { AxiosError } from 'axios';
   import { ILoginDTO } from '@/types/dto';
-  import { setToken } from '@/utils/token';
   import apiService from '@/services/apiService';
   import { validateEmail } from '@/utils/validators';
   import HttpStatusCodeEnum from '@/data/enums/httpStatusCodeEnum';
@@ -109,10 +108,8 @@
             email: String(userData.value.email),
             password: String(userData.value.password),
           };
-          const response = await apiService.login(dto);
-          const token = response.data.token;
+          await apiService.login(dto);
 
-          setToken(token.split(' ')[1]);
           router.push({ path: '/dashboard', name: 'Dashboard' });
         } catch (error) {
           const axiosError = error as AxiosError;

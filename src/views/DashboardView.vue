@@ -8,8 +8,8 @@
 </template>
 
 <script lang="ts">
-  import DashboardComponents from '@/data/dashboardComponents';
   import { defineComponent, ref } from '@vue/runtime-core';
+  import DashboardComponents from '@/data/enums/dashboardComponents';
 
   export default defineComponent({
     name: 'DashboardView',

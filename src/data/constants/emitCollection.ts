@@ -1,6 +1,6 @@
 'use strict';
 
-import AuthComponents from './enums/authComponents';
+import AuthComponents from '../enums/authComponents';
 
 const emitCollection = Object.freeze({
   changeMenuView: ({ id }: { id: number }) => {
@@ -9,7 +9,6 @@ const emitCollection = Object.freeze({
   changeComponent: () => {
     return;
   },
-  changeAuthComponent: ({ component }: { component: AuthComponents }) => {},
   setLoading: ({ loadingState }: { loadingState: boolean }) => {
     return loadingState;
   },

@@ -2,9 +2,9 @@
 
 enum VerticalMenuIds {
   HOME = 1,
-  STATISTIC = 2,
-  COLLECTION = 3,
-  TODO = 4,
+  PROJECTS = 3,
+  TODO = 3,
+  STATISTIC = 4,
   CALENDAR = 5,
 }
 

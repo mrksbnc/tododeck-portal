@@ -18,7 +18,7 @@ const verticalMenuCollection: VerticalMenuCollectionType = Object.freeze({
       componentName: '',
       icon: 'fas fa-bookmark',
       name: 'Projects',
-      id: VerticalMenuIds.COLLECTION,
+      id: VerticalMenuIds.PROJECTS,
       module: MenuModuls.FEATURE,
     },
     {
@@ -30,8 +30,8 @@ const verticalMenuCollection: VerticalMenuCollectionType = Object.freeze({
     },
     {
       componentName: '',
-      icon: 'fas fa-chart-pie',
-      name: 'Statistic',
+      icon: 'fas fa-chart-bar',
+      name: 'Statistics',
       id: VerticalMenuIds.STATISTIC,
       module: MenuModuls.FEATURE,
     },

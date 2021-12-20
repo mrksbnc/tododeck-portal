@@ -3,7 +3,7 @@
     <div class="bg-cyan-900 flex flex-col w-full h-full text-white items-center rounded-xl">
       <div class="h-1/6 py-3 w-full rounded-tr-lg text-center mt-4 mb-5">
         <span class="font-bold text-lg mb-2">Welcome</span><br />
-        <span class="text-sky-400 font-semibold">Sarah Dayan</span>
+        <span class="text-sky-400 font-semibold">{{ nameOfUser }}</span>
       </div>
       <div
         class="h-3/6 w-full flex rounded-tr-lg text-center mx-auto content-center justify-center"
@@ -47,14 +47,16 @@
 </template>
 
 <script lang="ts">
+  import store from '@/store';
   import router from '@/router';
   import { MenuModul } from '@/types/menu';
   import { deleteToken } from '@/utils/token';
   import MenuModuls from '@/data/enums/menuModules';
-  import emitCollection from '@/data/emitCollection';
   import SystemMenuIds from '@/data/enums/systemMenuIds';
-  import { defineComponent, ref } from '@vue/runtime-core';
-  import verticalMenuCollection from '@/data/collections/verticalMenuCollection';
+  import { USER_STORE } from '@/data/constants/vuexConstants';
+  import emitCollection from '@/data/constants/emitCollection';
+  import { computed, defineComponent, ref } from '@vue/runtime-core';
+  import verticalMenuCollection from '@/data/constants/verticalMenuCollection';
 
   export default defineComponent({
     name: 'VerticalNavBar',
@@ -65,6 +67,8 @@
       const systemMenuIds = ref(SystemMenuIds);
       const systemMenu = ref(verticalMenuCollection.system);
       const featureMenu = ref(verticalMenuCollection.feature);
+
+      const nameOfUser = computed(() => store.getters[USER_STORE.GETTERS.GET_NAME]);
 
       const signOut = function () {
         deleteToken();
@@ -79,7 +83,7 @@
         emit('changeMenuView', { id });
       };
 
-      return { systemMenuIds, systemMenu, featureMenu, clickEventHandler };
+      return { systemMenuIds, systemMenu, featureMenu, nameOfUser, clickEventHandler };
     },
   });
 </script>

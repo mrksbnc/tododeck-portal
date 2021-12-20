@@ -15,4 +15,5 @@ export interface ILoginDTO {
   password: string;
 }
 
-export type ILoginResponseDTO = AxiosResponse<{ user: PartialUser; token: string }>;
+export type LoginResponseDTO = AxiosResponse<{ token: string }>;
+export type GetAppDataResponseDTO = AxiosResponse<{ user: PartialUser }>;
