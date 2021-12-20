@@ -1,11 +1,11 @@
 'use strict';
 
 enum DashboardComponents {
-  HOME = 'HomeView',
-  STATISTIC = 'StatisticView',
-  COLLECTION = 'CollectionView',
-  TODO = 'TodoView',
-  CALENDAR = 'CalendarView',
+  HOME = 'HomeLayout',
+  STATISTIC = 'StatisticLayout',
+  COLLECTION = 'CollectionLayout',
+  TODO = 'TodoLayout',
+  CALENDAR = 'CalendarLayout',
 }
 
 export default DashboardComponents;

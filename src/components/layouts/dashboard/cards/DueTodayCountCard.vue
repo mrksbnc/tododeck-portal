@@ -17,7 +17,7 @@
   import { defineComponent, ref } from '@vue/runtime-core';
 
   export default defineComponent({
-    name: 'DueTodayCard',
+    name: 'DueTodayCountCard',
     setup() {
       const isLoading = ref(false);
       const dueTodayTaskCount = ref(0);
@@ -26,9 +26,3 @@
     },
   });
 </script>
-
-<style>
-  .test {
-    background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
-  }
-</style>

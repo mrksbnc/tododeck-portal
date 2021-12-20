@@ -1,9 +1,9 @@
 'use strict';
 
 import store from '@/store';
-import { parseJwt, setToken } from '@/utils/token';
 import httpClient from '@/utils/httpClient';
 import ApiRoutes from '@/data/enums/endpoints';
+import { parseJwt, setToken } from '@/utils/token';
 import { ICreateUserDTO, ILoginDTO } from '@/types/dto';
 import { USER_STORE } from '@/data/constants/vuexConstants';
 import { GetAppDataResponseDTO, LoginResponseDTO } from '@/types/dto';
