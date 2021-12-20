@@ -20,3 +20,11 @@ export type UserPropModel = {
   firstName: string;
   lastName: string;
 };
+
+export type ProjectModel = {
+  id: number;
+  name: string;
+  description?: string;
+  userId: number;
+  color: string;
+};

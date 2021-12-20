@@ -4,9 +4,10 @@ import store from '@/store';
 import httpClient from '@/utils/httpClient';
 import ApiRoutes from '@/data/enums/endpoints';
 import { parseJwt, setToken } from '@/utils/token';
-import { GetCountResponseDTO, ICreateUserDTO, ILoginDTO } from '@/types/dto';
+import { GetCountResponseDTO, GetProjectDTO, ICreateUserDTO, ILoginDTO } from '@/types/dto';
 import { USER_STORE } from '@/data/constants/vuexConstants';
 import { GetAppDataResponseDTO, LoginResponseDTO } from '@/types/dto';
+import user from '@/store/modules/user';
 
 class ApiService {
   public async signUp(dto: ICreateUserDTO) {
@@ -34,15 +35,22 @@ class ApiService {
     store.dispatch(USER_STORE.ACTIONS.SET_USER_ID, userId);
   }
 
-  public async getProjectCount(projectId: number): Promise<number> {
+  public async getProjectCount(userId: number): Promise<number> {
     const response: GetCountResponseDTO = await httpClient.get(
-      ApiRoutes.GET_PROJECT_COUNT + projectId
+      ApiRoutes.GET_PROJECT_COUNT + userId
     );
     return response.data.count;
   }
 
   public async getTodoCount(userId: number): Promise<number> {
     const response: GetCountResponseDTO = await httpClient.get(ApiRoutes.GET_TODO_COUNT + userId);
+    return response.data.count;
+  }
+
+  public async getImportantCountByUserId(userId: number): Promise<number> {
+    const response: GetCountResponseDTO = await httpClient.get(
+      ApiRoutes.GET_IMPORTANT_TODOS_BY_USER_ID + userId
+    );
     return response.data.count;
   }
 
@@ -65,6 +73,12 @@ class ApiService {
       ApiRoutes.GET_DUE_TODAY_COUNT_BY_LIST_ID + listId
     );
     return response.data.count;
+  }
+
+  public async getProjectsByUserId(userId: number): Promise<GetProjectDTO> {
+    const response: GetProjectDTO = await httpClient.get(ApiRoutes.GET_PROJECTS + userId);
+    console.log(response);
+    return response;
   }
 }
 

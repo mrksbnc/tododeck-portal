@@ -5,10 +5,10 @@
     class="h-full w-full bg-gradient-to-tr from-yellow-400 to-amber-500 rounded-xl flex font-bold text-white font-sans shadow-md"
   >
     <div class="h-full w-full items-center flex text-3xl pl-6">
-      <span>Active projects</span>
+      <span>Important todos</span>
     </div>
-    <div class="pr-8 pl-0 flex items-center font-sans">
-      <span class="text-7xl">{{ activeProjectCount }}</span>
+    <div class="pr-8 pl-2 flex items-center font-sans">
+      <span class="text-7xl">{{ importantTodoCount }}</span>
     </div>
   </div>
 </template>
@@ -21,18 +21,18 @@
   import { computed, defineComponent, onMounted, ref } from '@vue/runtime-core';
 
   export default defineComponent({
-    name: 'ProjectCountCard',
+    name: 'ImportantCountCard',
     setup() {
       const isLoading = ref(false);
-      const activeProjectCount = ref(0);
+      const importantTodoCount = ref(0);
 
       const userId = computed(() => store.getters[USER_STORE.GETTERS.GET_USER_ID]);
 
       const getProjectCount = async () => {
         isLoading.value = true;
         try {
-          const count = await apiService.getProjectCount(userId.value);
-          activeProjectCount.value = count;
+          const count = await apiService.getImportantCountByUserId(userId.value);
+          importantTodoCount.value = count;
         } catch (error) {
           notificationFunctions.errorAlert({
             title: 'Something went wrong!',
@@ -47,7 +47,7 @@
         await getProjectCount();
       });
 
-      return { isLoading, activeProjectCount };
+      return { isLoading, importantTodoCount };
     },
   });
 </script>

@@ -7,7 +7,7 @@
     <div class="h-full w-full items-center flex text-3xl pl-6">
       <span>Active todos</span>
     </div>
-    <div class="pr-8 pl-0 flex items-center font-sans">
+    <div class="pr-8 pl-2 flex items-center font-sans">
       <span class="text-7xl">{{ activeTodoCount }}</span>
     </div>
   </div>

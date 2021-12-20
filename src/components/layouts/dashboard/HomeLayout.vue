@@ -5,7 +5,7 @@
         <DueTodayCountCard class="w-full h-full" />
       </div>
       <div class="w-1/3 p-1">
-        <ProjectCountCard class="w-full h-full" />
+        <ImportantCountCard class="w-full h-full" />
       </div>
       <div class="w-1/3 p-1">
         <TodoCountCard class="w-full h-full" />
