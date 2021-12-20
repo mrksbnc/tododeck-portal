@@ -62,7 +62,7 @@
         return selectedComponent.value === AuthComponents.LOGIN ? 'SignUpMessage' : 'LoginMessage';
       });
 
-      function changeActiveComponent() {
+      const changeActiveComponent = () => {
         if (selectedComponent.value == AuthComponents.LOGIN)
           selectedComponent.value = AuthComponents.SIGN_UP;
         else selectedComponent.value = AuthComponents.LOGIN;
@@ -70,11 +70,11 @@
         nextTick(() => {
           ++forceRenderKey.value;
         });
-      }
+      };
 
-      function changeComponent() {
+      const changeComponent = () => {
         changeActiveComponent();
-      }
+      };
 
       return {
         forceRenderKey,

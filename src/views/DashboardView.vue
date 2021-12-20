@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full h-full flex flex-row bg-slate-100">
+  <div class="w-full h-full flex flex-row bg-white overflow-hidden p-2">
     <VerticalNavBar class="w-1/5 h-full" @changeMenuView="changeActiveView" />
-    <div class="w-4/5 h-full bg-transparent">
+    <div class="w-full h-full">
       <component :is="activeViewComponent" />
     </div>
   </div>
@@ -17,9 +17,9 @@
       const defaultViewComponent = ref(DashboardComponents.HOME);
       const activeViewComponent = ref(defaultViewComponent.value);
 
-      function changeActiveView({ id }: { id: number }) {
+      const changeActiveView = ({ id }: { id: number }) => {
         console.log(id);
-      }
+      };
 
       return { activeViewComponent, changeActiveView };
     },

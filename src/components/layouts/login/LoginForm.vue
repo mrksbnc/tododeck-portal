@@ -116,7 +116,7 @@
           router.push({ path: '/dashboard', name: 'Dashboard' });
         } catch (error) {
           const axiosError = error as AxiosError;
-          if (axiosError.response?.status === HttpStatusCodeEnum.NOT_FOUND) {
+          if (axiosError.response?.status === HttpStatusCodeEnum.BAD_REQUEST) {
             notificationFunctions.errorAlert({
               title: 'Invalid credentials!',
               text: 'Incorrect e-mail or password',

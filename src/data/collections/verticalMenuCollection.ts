@@ -16,15 +16,8 @@ const verticalMenuCollection: VerticalMenuCollectionType = Object.freeze({
     },
     {
       componentName: '',
-      icon: 'fas fa-chart-pie',
-      name: 'Statistic',
-      id: VerticalMenuIds.STATISTIC,
-      module: MenuModuls.FEATURE,
-    },
-    {
-      componentName: '',
-      icon: 'fas fa-folder',
-      name: 'Collections',
+      icon: 'fas fa-bookmark',
+      name: 'Projects',
       id: VerticalMenuIds.COLLECTION,
       module: MenuModuls.FEATURE,
     },
@@ -33,6 +26,13 @@ const verticalMenuCollection: VerticalMenuCollectionType = Object.freeze({
       icon: 'fas fa-tasks',
       name: 'Todos',
       id: VerticalMenuIds.TODO,
+      module: MenuModuls.FEATURE,
+    },
+    {
+      componentName: '',
+      icon: 'fas fa-chart-pie',
+      name: 'Statistic',
+      id: VerticalMenuIds.STATISTIC,
       module: MenuModuls.FEATURE,
     },
     {
