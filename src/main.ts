@@ -3,7 +3,7 @@ import App from './App.vue';
 import store from './store';
 import router from './router';
 import { createApp } from 'vue';
-import apiService from './services/apiService';
+import { apiService } from './services/apiService';
 import { registerComponents } from './components';
 import { getToken, isTokenValid, parseJwt } from './utils/token';
 

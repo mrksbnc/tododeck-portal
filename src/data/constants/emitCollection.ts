@@ -1,7 +1,5 @@
 'use strict';
 
-import AuthComponents from '../enums/authComponents';
-
 const emitCollection = Object.freeze({
   changeMenuView: ({ id }: { id: number }) => {
     return { id };

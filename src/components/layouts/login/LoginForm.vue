@@ -43,7 +43,7 @@
   import router from '@/router';
   import { AxiosError } from 'axios';
   import { ILoginDTO } from '@/types/dto';
-  import apiService from '@/services/apiService';
+  import { apiService } from '@/services/apiService';
   import { validateEmail } from '@/utils/validators';
   import HttpStatusCodeEnum from '@/data/enums/httpStatusCodeEnum';
   import notificationFunctions from '@/functions/notificationFunctions';

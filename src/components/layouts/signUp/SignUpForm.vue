@@ -64,8 +64,7 @@
 <script lang="ts">
   import { AxiosError } from 'axios';
   import { ICreateUserDTO } from '@/types/dto';
-  import apiService from '@/services/apiService';
-  import AuthComponents from '@/data/enums/authComponents';
+  import { apiService } from '@/services/apiService';
   import emitCollection from '@/data/constants/emitCollection';
   import HttpStatusCodeEnum from '@/data/enums/httpStatusCodeEnum';
   import { validateEmail, validatePassword } from '@/utils/validators';
@@ -75,7 +74,7 @@
   export default defineComponent({
     name: 'SignUpForm',
     emits: {
-      changeAuthComponent: emitCollection.changeAuthComponent,
+      changeComponent: emitCollection.changeComponent,
     },
     setup(props, { emit }) {
       const updateKey = ref(0);
@@ -155,7 +154,7 @@
 
           await apiService.signUp(dto);
 
-          emit('changeAuthComponent', { component: AuthComponents.LOGIN });
+          emit('changeComponent');
           notificationFunctions.successAlert({
             title: 'Success',
             text: 'Sign up was successfull!',
