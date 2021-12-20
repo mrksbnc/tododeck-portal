@@ -10,7 +10,7 @@ export type ToastPropModel = {
 };
 
 export type ModalPropModel = {
-  uid: string;
+  id: number;
   name: string;
 };
 

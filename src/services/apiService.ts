@@ -25,44 +25,46 @@ class ApiService {
   public async getAppData(id: number): Promise<void> {
     const response: GetAppDataResponseDTO = await httpClient.get(ApiRoutes.GET_APP_DATA + id);
 
-    const user = response?.data?.user;
-    const name = response.data?.user?.firstName + ' ' + response.data?.user?.lastName;
+    const user = response.data.user;
+    const userId = response.data.user.id;
+    const name = response.data.user.firstName + ' ' + response.data.user.lastName;
 
     store.dispatch(USER_STORE.ACTIONS.SET_NAME, name);
     store.dispatch(USER_STORE.ACTIONS.ADD_USER, user);
+    store.dispatch(USER_STORE.ACTIONS.SET_USER_ID, userId);
   }
 
-  public async getProjectCount(projectId: number) {
+  public async getProjectCount(projectId: number): Promise<number> {
     const response: GetCountResponseDTO = await httpClient.get(
       ApiRoutes.GET_PROJECT_COUNT + projectId
     );
-    return response;
+    return response.data.count;
   }
 
-  public async getTodoCount(userId: number) {
+  public async getTodoCount(userId: number): Promise<number> {
     const response: GetCountResponseDTO = await httpClient.get(ApiRoutes.GET_TODO_COUNT + userId);
-    return response;
+    return response.data.count;
   }
 
-  public async getTodoCountByListId(listId: number) {
+  public async getTodoCountByListId(listId: number): Promise<number> {
     const response: GetCountResponseDTO = await httpClient.get(
       ApiRoutes.GET_TODO_COUNT_BY_LIST_ID + listId
     );
-    return response;
+    return response.data.count;
   }
 
-  public async getDueTodayTodoCount(userId: number) {
+  public async getDueTodayTodoCount(userId: number): Promise<number> {
     const response: GetCountResponseDTO = await httpClient.get(
       ApiRoutes.GET_DUE_TODAY_COUNT + userId
     );
-    return response;
+    return response.data.count;
   }
 
-  public async getDueTodayTodoCountByListId(listId: number) {
+  public async getDueTodayTodoCountByListId(listId: number): Promise<number> {
     const response: GetCountResponseDTO = await httpClient.get(
       ApiRoutes.GET_DUE_TODAY_COUNT_BY_LIST_ID + listId
     );
-    return response;
+    return response.data.count;
   }
 }
 

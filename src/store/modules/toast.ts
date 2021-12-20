@@ -26,9 +26,9 @@ const mutations: MutationTree<ToastStateTypes> & ToastMutationTypes = {
     payload.id = Math.random() + Date.now();
     state.toasts.push(payload);
   },
-  [TOAST_STORE.MUTATIONS.REMOVE_TOAST]: (state: ToastStateTypes, payload: number): void => {
+  [TOAST_STORE.MUTATIONS.REMOVE_TOAST]: (state: ToastStateTypes, payload: string): void => {
     return state.toasts.forEach((e, i) => {
-      if (e.id === payload) state.toasts.slice(i, 1);
+      if (e.id === Number(payload)) state.toasts.slice(i, 1);
     });
   },
 };
@@ -37,7 +37,7 @@ const actions: ActionTree<ToastStateTypes, IRootState> & ToastActionTypes = {
   [TOAST_STORE.ACTIONS.ADD_TOAST]: ({ commit }, payload: ToastPropModel): void => {
     commit(TOAST_STORE.MUTATIONS.ADD_TOAST, payload);
   },
-  [TOAST_STORE.ACTIONS.REMOVE_TOAST]: ({ commit }, payload: number): void => {
+  [TOAST_STORE.ACTIONS.REMOVE_TOAST]: ({ commit }, payload: string): void => {
     commit(TOAST_STORE.MUTATIONS.REMOVE_TOAST, payload);
   },
 };

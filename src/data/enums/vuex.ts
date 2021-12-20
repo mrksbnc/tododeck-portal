@@ -46,6 +46,7 @@ export enum ToastActions {
 export enum UserGetters {
   GET_USER = 'GET_USER',
   GET_NAME = 'GET_NAME',
+  GET_USER_ID = 'GET_USER_ID',
 }
 
 export enum UserMutations {
@@ -53,6 +54,8 @@ export enum UserMutations {
   REMOVE_USER = 'REMOVE_USER',
   SET_NAME = 'SET_NAME',
   REMOVE_NAME = 'REMOVE_NAME',
+  SET_USER_ID = 'SET_USER_ID',
+  REMOVE_USER_ID = ' REMOVE_USER_ID',
 }
 
 export enum UserActions {
@@ -60,4 +63,6 @@ export enum UserActions {
   REMOVE_USER = 'REMOVE_USER',
   SET_NAME = 'SET_NAME',
   REMOVE_NAME = 'REMOVE_NAME',
+  SET_USER_ID = 'SET_USER_ID',
+  REMOVE_USER_ID = ' REMOVE_USER_ID',
 }

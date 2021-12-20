@@ -38,4 +38,5 @@ class NotificationFunctions {
   }
 }
 
-export default new NotificationFunctions();
+const instance = new NotificationFunctions();
+export { instance as notificationFunctions };

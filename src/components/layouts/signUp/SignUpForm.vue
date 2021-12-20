@@ -68,7 +68,7 @@
   import emitCollection from '@/data/constants/emitCollection';
   import HttpStatusCodeEnum from '@/data/enums/httpStatusCodeEnum';
   import { validateEmail, validatePassword } from '@/utils/validators';
-  import notificationFunctions from '@/functions/notificationFunctions';
+  import { notificationFunctions } from '@/functions/notificationFunctions';
   import { defineComponent, ref, computed, nextTick } from '@vue/runtime-core';
 
   export default defineComponent({

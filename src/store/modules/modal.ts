@@ -16,8 +16,8 @@ const state: ModalStateTypes = {
 };
 
 const getters: GetterTree<ModalStateTypes, IRootState> & ModalGettersTypes = {
-  [MODAL_STORE.GETTERS.GET_MODAL_STATUS]: (state: ModalStateTypes, payload: string) => {
-    return state.modals.find((f) => f.uid == payload);
+  [MODAL_STORE.GETTERS.GET_MODAL_STATUS]: (state: ModalStateTypes, payload: number) => {
+    return state.modals.find((f) => f.id === payload);
   },
   [MODAL_STORE.GETTERS.GET_MODALS]: (state: ModalStateTypes) => {
     return state.modals;
@@ -26,12 +26,12 @@ const getters: GetterTree<ModalStateTypes, IRootState> & ModalGettersTypes = {
 
 const mutations: MutationTree<ModalStateTypes> & ModalMutationTypes = {
   [MODAL_STORE.MUTATIONS.ADD_MODAL]: (state: ModalStateTypes, payload: ModalPropModel) => {
-    payload.uid = Math.random() + Date.now() + '_' + payload.name;
+    payload.id = payload.id ? payload.id : payload.id + Date.now();
     state.modals.push(payload);
   },
-  [MODAL_STORE.MUTATIONS.REMOVE_MODAL]: (state: ModalStateTypes, payload: string) => {
+  [MODAL_STORE.MUTATIONS.REMOVE_MODAL]: (state: ModalStateTypes, payload: number) => {
     state.modals = [];
-    state.modals = state.modals.filter((f) => f.uid != payload);
+    state.modals = state.modals.filter((f) => f.id !== payload);
   },
 };
 

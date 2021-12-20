@@ -14,13 +14,38 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from '@vue/runtime-core';
+  import store from '@/store';
+  import { apiService } from '@/services/apiService';
+  import { USER_STORE } from '@/data/constants/vuexConstants';
+  import { notificationFunctions } from '@/functions/notificationFunctions';
+  import { computed, defineComponent, onMounted, ref } from '@vue/runtime-core';
 
   export default defineComponent({
     name: 'TodoCountCard',
     setup() {
       const isLoading = ref(false);
       const activeTodoCount = ref(0);
+
+      const userId = computed(() => store.getters[USER_STORE.GETTERS.GET_USER_ID]);
+
+      const getTodoCount = async () => {
+        isLoading.value = true;
+        try {
+          const count = await apiService.getTodoCount(userId.value);
+          activeTodoCount.value = count;
+        } catch (error) {
+          notificationFunctions.errorAlert({
+            title: 'Something went wrong!',
+            text: "Todo count couldn't be fetched from server",
+          });
+        } finally {
+          isLoading.value = false;
+        }
+      };
+
+      onMounted(async () => {
+        await getTodoCount();
+      });
 
       return { isLoading, activeTodoCount };
     },

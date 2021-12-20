@@ -46,7 +46,7 @@
   import { apiService } from '@/services/apiService';
   import { validateEmail } from '@/utils/validators';
   import HttpStatusCodeEnum from '@/data/enums/httpStatusCodeEnum';
-  import notificationFunctions from '@/functions/notificationFunctions';
+  import { notificationFunctions } from '@/functions/notificationFunctions';
   import { computed, defineComponent, ref, nextTick } from '@vue/runtime-core';
 
   export default defineComponent({
