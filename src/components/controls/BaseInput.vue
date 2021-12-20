@@ -80,10 +80,10 @@
         };
       });
 
-      function updateInput(e: Event): void {
+      const updateInput = (e: Event): void => {
         const target = e.target as HTMLInputElement;
         emit('update:modelValue', target.value);
-      }
+      };
 
       return {
         input,

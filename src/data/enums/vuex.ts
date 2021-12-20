@@ -6,7 +6,6 @@ export enum RootGetters {
 
 export enum RootMutations {
   UPDATE_VERSION = 'UPDATE_VERSION',
-  SET_ROOT_DISPATCH = 'SET_ROOT_DISPATCH',
 }
 
 export enum RootActions {
@@ -14,22 +13,18 @@ export enum RootActions {
 }
 
 export enum ModalGetters {
-  GET_MODALS = 'GET_MODALS',
+  GET_MODAL = 'GET_MODAL',
   GET_MODAL_STATUS = 'GET_MODAL_STATUS',
 }
 
 export enum ModalMutations {
-  ADD_MODAL = 'ADD_MODAL',
-  REMOVE_MODAL = 'REMOVE_MODAL',
-  SET_MODAL_STATUS = 'SET_MODAL_STATUS',
-  SET_ROOT_DISPATCH = 'SET_ROOT_DISPATCH',
+  OPEN_MODAL = 'OPEN_MODAL',
+  CLOSE_MODAL = 'CLOSE_MODAL',
 }
 
 export enum ModalActions {
-  ADD_MODAL = 'ADD_MODAL',
-  REMOVE_MODAL = 'REMOVE_MODAL',
-  SET_MODAL_STATUS = 'SET_MODAL_STATUS',
-  SET_ROOT_DISPATCH = 'SET_ROOT_DISPATCH',
+  OPEN_MODAL = 'OPEN_MODAL',
+  CLOSE_MODAL = 'CLOSE_MODAL',
 }
 
 export enum ToastGetters {
@@ -39,11 +34,33 @@ export enum ToastGetters {
 export enum ToastMutations {
   ADD_TOAST = 'ADD_TOAST',
   REMOVE_TOAST = 'REMOVE_TOAST',
-  SET_ROOT_DISPATCH = 'SET_ROOT_DISPATCH',
 }
 
 export enum ToastActions {
   ADD_TOAST = 'ADD_TOAST',
   REMOVE_TOAST = 'REMOVE_TOAST',
-  SET_ROOT_DISPATCH = 'SET_ROOT_DISPATCH',
+}
+
+export enum UserGetters {
+  GET_USER = 'GET_USER',
+  GET_NAME = 'GET_NAME',
+  GET_USER_ID = 'GET_USER_ID',
+}
+
+export enum UserMutations {
+  ADD_USER = 'ADD_USER',
+  REMOVE_USER = 'REMOVE_USER',
+  SET_NAME = 'SET_NAME',
+  REMOVE_NAME = 'REMOVE_NAME',
+  SET_USER_ID = 'SET_USER_ID',
+  REMOVE_USER_ID = ' REMOVE_USER_ID',
+}
+
+export enum UserActions {
+  ADD_USER = 'ADD_USER',
+  REMOVE_USER = 'REMOVE_USER',
+  SET_NAME = 'SET_NAME',
+  REMOVE_NAME = 'REMOVE_NAME',
+  SET_USER_ID = 'SET_USER_ID',
+  REMOVE_USER_ID = ' REMOVE_USER_ID',
 }

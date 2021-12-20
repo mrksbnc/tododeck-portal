@@ -15,7 +15,7 @@ httpClient.interceptors.request.use(
     if (!request.url?.includes('login') && !request.url?.includes('register')) {
       const token = getToken();
       if (!token) throw new Error('Token not found');
-      if (request.headers) request.headers['authorization'] = `Bearer ${token}`;
+      if (request.headers) request.headers['authorization'] = token;
     }
     return request;
   },

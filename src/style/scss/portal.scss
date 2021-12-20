@@ -5,3 +5,23 @@ body,
   height: 100% !important;
   overflow: hidden !important;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #edf2f7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 100vh;
+  border: 3px solid #edf2f7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}

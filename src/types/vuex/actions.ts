@@ -1,37 +1,33 @@
+'use strict';
+
 import {
   IRootState,
-  ModalMutationsTypes,
+  UserStateTypes,
   ModalStateTypes,
-  RootMutationsTypes,
-  StoreActions,
-  ToastMutationsTypes,
   ToastStateTypes,
-} from './interfaces';
-import { ActionContext, DispatchOptions } from 'vuex';
-
-export type AugmentedActionContextRoot = {
-  commit<K extends keyof RootMutationsTypes>(
-    key: K,
-    payload: Parameters<RootMutationsTypes[K]>[1]
-  ): ReturnType<RootMutationsTypes[K]>;
-} & Omit<ActionContext<IRootState, IRootState>, 'commit'> & {
-    dispatch<K extends keyof StoreActions>(
-      key: K,
-      payload?: Parameters<StoreActions[K]>[1],
-      options?: DispatchOptions
-    ): ReturnType<StoreActions[K]>;
-  };
+  UserMutationTypes,
+  ToastMutationTypes,
+  ModalMutationTypes,
+} from '../interfaces/store';
+import { ActionContext } from 'vuex';
 
 export type AugmentedModalActionContext = {
-  commit<K extends keyof ModalMutationsTypes>(
+  commit<K extends keyof ModalMutationTypes>(
     key: K,
-    payload: Parameters<ModalMutationsTypes[K]>[1]
-  ): ReturnType<ModalMutationsTypes[K]>;
+    payload: Parameters<ModalMutationTypes[K]>[1]
+  ): ReturnType<ModalMutationTypes[K]>;
 } & Omit<ActionContext<ModalStateTypes, IRootState>, 'commit'>;
 
 export type AugmentedToastActionContext = {
-  commit<K extends keyof ToastMutationsTypes>(
+  commit<K extends keyof ToastMutationTypes>(
     key: K,
-    payload: Parameters<ToastMutationsTypes[K]>[1]
-  ): ReturnType<ToastMutationsTypes[K]>;
+    payload: Parameters<ToastMutationTypes[K]>[1]
+  ): ReturnType<ToastMutationTypes[K]>;
 } & Omit<ActionContext<ToastStateTypes, IRootState>, 'commit'>;
+
+export type AugmentedUserActionContext = {
+  commit<K extends keyof UserMutationTypes>(
+    key: K,
+    payload: Parameters<UserMutationTypes[K]>[1]
+  ): ReturnType<UserMutationTypes[K]>;
+} & Omit<ActionContext<UserStateTypes, IRootState>, 'commit'>;

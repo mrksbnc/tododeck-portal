@@ -2,7 +2,7 @@
   <div class="w-full h-full flex justify-center items-center bg-teal-600">
     <div class="container mx-auto w-4/5 h-5/6 rounded-lg bg-white flex flex-row">
       <div
-        class="flex justify-center h-full items-center w-1/2 bg-white rounded-lg bg-cover bg-liquid-marble"
+        class="flex justify-center h-full items-center w-1/2 bg-white rounded-lg bg-cover bg-liquid-marble sm:hidden md:flex"
       >
         <div
           class="flex flex-col w-5/6 h-5/6 p-5 rounded-xl bg-opacity-40 backdrop-filter backdrop-blur-lg"
@@ -12,7 +12,7 @@
               <div
                 class="w-1/4 p-2 text-white bg-white bg-opacity-30 rounded-sm backdrop-filter backdrop-blur-lg text-center"
               >
-                <label class="text-base font-bold font-mono">Tododeck</label>
+                <span class="text-lg text-mono font-bold font-mono">tododeck</span>
               </div>
               <hr class="border-2 w-1/6 mt-2 mb-10 bg-white" />
               <div class="d-flex flex-col text-white mt-7">
@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-      <div class="w-1/2 h-full">
+      <div class="h-full sm:w-full md:w-1/2">
         <component
           :is="activeComponent"
           :key="forceRenderKey"
@@ -62,7 +62,7 @@
         return selectedComponent.value === AuthComponents.LOGIN ? 'SignUpMessage' : 'LoginMessage';
       });
 
-      function changeActiveComponent() {
+      const changeActiveComponent = () => {
         if (selectedComponent.value == AuthComponents.LOGIN)
           selectedComponent.value = AuthComponents.SIGN_UP;
         else selectedComponent.value = AuthComponents.LOGIN;
@@ -70,11 +70,11 @@
         nextTick(() => {
           ++forceRenderKey.value;
         });
-      }
+      };
 
-      function changeComponent() {
+      const changeComponent = () => {
         changeActiveComponent();
-      }
+      };
 
       return {
         forceRenderKey,

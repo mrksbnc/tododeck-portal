@@ -62,18 +62,20 @@
 </template>
 
 <script lang="ts">
-  import apiService from '@/services/apiService';
-  import { ICreateUserDTO } from '@/types/interfaces/dto';
-  import AuthComponents from '@/data/enums/authComponents';
-  import { validateEmail, validatePassword } from '@/utils/validators';
-  import notificationFunctions from '@/functions/notificationFunctions';
-  import { defineComponent, ref, computed, nextTick } from '@vue/runtime-core';
-  import HttpStatusCodeEnum from '@/data/constants/httpStatusCodeEnum';
   import { AxiosError } from 'axios';
+  import { ICreateUserDTO } from '@/types/dto';
+  import { apiService } from '@/services/apiService';
+  import emitCollection from '@/data/constants/emitCollection';
+  import HttpStatusCodeEnum from '@/data/enums/httpStatusCodeEnum';
+  import { validateEmail, validatePassword } from '@/utils/validators';
+  import { notificationFunctions } from '@/functions/notificationFunctions';
+  import { defineComponent, ref, computed, nextTick } from '@vue/runtime-core';
 
   export default defineComponent({
     name: 'SignUpForm',
-    emits: ['changeComponent'],
+    emits: {
+      changeComponent: emitCollection.changeComponent,
+    },
     setup(props, { emit }) {
       const updateKey = ref(0);
       const isLoading = ref(false);
@@ -152,7 +154,7 @@
 
           await apiService.signUp(dto);
 
-          emit('changeComponent', { component: AuthComponents.LOGIN });
+          emit('changeComponent');
           notificationFunctions.successAlert({
             title: 'Success',
             text: 'Sign up was successfull!',

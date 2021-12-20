@@ -10,10 +10,13 @@
 
 <script lang="ts">
   import { defineComponent } from '@vue/runtime-core';
+  import emitCollection from '@/data/constants/emitCollection';
 
   export default defineComponent({
     name: 'SignUpMessage',
-    emits: ['changeComponent'],
+    emits: {
+      changeComponent: emitCollection.changeComponent,
+    },
     setup(props, { emit }) {
       const changeActiveComponent = () => {
         emit('changeComponent');

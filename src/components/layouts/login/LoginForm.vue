@@ -41,15 +41,13 @@
 
 <script lang="ts">
   import router from '@/router';
-  import apiService from '@/services/apiService';
-  import { validateEmail } from '@/utils/validators';
-  import { ILoginDTO } from '@/types/interfaces/dto';
-  import notificationFunctions from '@/functions/notificationFunctions';
-  import { computed, defineComponent, ref, nextTick } from '@vue/runtime-core';
-  import { setToken } from '@/utils/token';
   import { AxiosError } from 'axios';
-  import { ILoginResponseDTO } from '@/types/dto';
-  import HttpStatusCodeEnum from '@/data/constants/httpStatusCodeEnum';
+  import { ILoginDTO } from '@/types/dto';
+  import { apiService } from '@/services/apiService';
+  import { validateEmail } from '@/utils/validators';
+  import HttpStatusCodeEnum from '@/data/enums/httpStatusCodeEnum';
+  import { notificationFunctions } from '@/functions/notificationFunctions';
+  import { computed, defineComponent, ref, nextTick } from '@vue/runtime-core';
 
   export default defineComponent({
     name: 'LoginForm',
@@ -110,14 +108,12 @@
             email: String(userData.value.email),
             password: String(userData.value.password),
           };
-          const response = await apiService.login(dto);
-          const token = response.data.token;
+          await apiService.login(dto);
 
-          setToken(token.split(' ')[1]);
           router.push({ path: '/dashboard', name: 'Dashboard' });
         } catch (error) {
           const axiosError = error as AxiosError;
-          if (axiosError.response?.status === HttpStatusCodeEnum.NOT_FOUND) {
+          if (axiosError.response?.status === HttpStatusCodeEnum.BAD_REQUEST) {
             notificationFunctions.errorAlert({
               title: 'Invalid credentials!',
               text: 'Incorrect e-mail or password',

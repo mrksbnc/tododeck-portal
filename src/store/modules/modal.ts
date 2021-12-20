@@ -4,50 +4,38 @@ import {
   IRootState,
   ModalStateTypes,
   ModalGettersTypes,
-  ModalActionsTypes,
-  ModalMutationsTypes,
+  ModalActionTypes,
+  ModalMutationTypes,
 } from '@/types/interfaces/store';
-import { ModalPropModel } from '@/types/interfaces/models';
+import { ModalPropModel } from '@/types/models';
 import { MODAL_STORE } from '@/data/constants/vuexConstants';
 import { GetterTree, MutationTree, ActionTree, Module } from 'vuex';
 
 const state: ModalStateTypes = {
-  modals: [],
-  rootDispatch: false,
+  modal: undefined,
 };
 
 const getters: GetterTree<ModalStateTypes, IRootState> & ModalGettersTypes = {
-  [MODAL_STORE.GETTERS.GET_MODAL_STATUS]: (state: ModalStateTypes, payload: string) => {
-    return state.modals.find((f) => f.uid == payload);
-  },
-  [MODAL_STORE.GETTERS.GET_MODALS]: (state: ModalStateTypes) => {
-    return state.modals;
+  [MODAL_STORE.GETTERS.GET_MODAL]: (state: ModalStateTypes) => {
+    return state.modal;
   },
 };
 
-const mutations: MutationTree<ModalStateTypes> & ModalMutationsTypes = {
-  [MODAL_STORE.MUTATIONS.ADD_MODAL]: (state: ModalStateTypes, payload: ModalPropModel) => {
-    payload.uid = Math.random() + Date.now() + '_' + payload.name;
-    state.modals.push(payload);
+const mutations: MutationTree<ModalStateTypes> & ModalMutationTypes = {
+  [MODAL_STORE.MUTATIONS.OPEN_MODAL]: (state: ModalStateTypes, payload: ModalPropModel) => {
+    state.modal = payload;
   },
-  [MODAL_STORE.MUTATIONS.REMOVE_MODAL]: (state: ModalStateTypes, payload: string) => {
-    state.modals = [];
-    state.modals = state.modals.filter((f) => f.uid != payload);
-  },
-  [MODAL_STORE.MUTATIONS.SET_ROOT_DISPATCH]: (state: ModalStateTypes, payload: boolean) => {
-    state.rootDispatch = payload;
+  [MODAL_STORE.MUTATIONS.CLOSE_MODAL]: (state: ModalStateTypes) => {
+    state.modal = undefined;
   },
 };
 
-const actions: ActionTree<ModalStateTypes, IRootState> & ModalActionsTypes = {
-  [MODAL_STORE.ACTIONS.ADD_MODAL]: ({ commit }, payload: ModalPropModel): void => {
-    commit(MODAL_STORE.MUTATIONS.ADD_MODAL, payload);
+const actions: ActionTree<ModalStateTypes, IRootState> & ModalActionTypes = {
+  [MODAL_STORE.ACTIONS.OPEN_MODAL]: ({ commit }, payload: ModalPropModel): void => {
+    commit(MODAL_STORE.MUTATIONS.OPEN_MODAL, payload);
   },
-  [MODAL_STORE.ACTIONS.REMOVE_MODAL]: ({ commit }, payload: number): void => {
-    commit(MODAL_STORE.MUTATIONS.REMOVE_MODAL, payload);
-  },
-  [MODAL_STORE.ACTIONS.SET_ROOT_DISPATCH]: ({ commit }, payload: boolean): void => {
-    commit(MODAL_STORE.MUTATIONS.SET_MODAL_STATUS, payload);
+  [MODAL_STORE.ACTIONS.CLOSE_MODAL]: ({ commit }): void => {
+    commit(MODAL_STORE.MUTATIONS.CLOSE_MODAL, undefined);
   },
 };
 

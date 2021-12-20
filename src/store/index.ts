@@ -1,9 +1,10 @@
 'use strict';
 
 import {
-  ModalStoreModuleTypes,
   RootStoreModuleTypes,
   ToastStoreModuleTypes,
+  ModalStoreModuleTypes,
+  UserStoreModuleTypes,
 } from '@/types/vuex/modules';
 import root from './modules/root';
 import { createStore } from 'vuex';
@@ -13,11 +14,13 @@ const store = createStore<IRootState>(root);
 
 type StoreModules = {
   root: RootStoreModuleTypes;
+  userModule: UserStoreModuleTypes;
   modalModule: ModalStoreModuleTypes;
   toastModule: ToastStoreModuleTypes;
 };
 
 export type Store = RootStoreModuleTypes<Pick<StoreModules, 'root'>> &
+  UserStoreModuleTypes<Pick<StoreModules, 'userModule'>> &
   ModalStoreModuleTypes<Pick<StoreModules, 'modalModule'>> &
   ToastStoreModuleTypes<Pick<StoreModules, 'toastModule'>>;
 

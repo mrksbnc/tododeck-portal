@@ -2,6 +2,7 @@
 
 import { AxiosResponse } from 'axios';
 import { PartialUser } from './globals';
+import { ProjectModel } from './models';
 
 export interface ICreateUserDTO {
   firstName: string;
@@ -15,4 +16,8 @@ export interface ILoginDTO {
   password: string;
 }
 
-export type ILoginResponseDTO = AxiosResponse<{ user: PartialUser; token: string }>;
+export type LoginResponseDTO = AxiosResponse<{ token: string }>;
+export type GetAppDataResponseDTO = AxiosResponse<{ user: PartialUser }>;
+export type GetCountResponseDTO = AxiosResponse<{ count: number }>;
+
+export type GetProjectDTO = AxiosResponse<{ collection: ProjectModel[] }>;

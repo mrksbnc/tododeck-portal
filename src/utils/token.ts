@@ -4,6 +4,10 @@ import { IDecodedToken } from '@/types/interfaces/token';
 
 const LOCAL_STORAGE_TOKEN = 'todo_token';
 
+export function has() {
+  return !!localStorage.getItem(LOCAL_STORAGE_TOKEN);
+}
+
 export function setToken(token: string): void {
   localStorage.setItem(LOCAL_STORAGE_TOKEN, token);
 }

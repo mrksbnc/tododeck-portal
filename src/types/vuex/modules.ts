@@ -1,82 +1,86 @@
 import {
-  IRootState,
+  UserStateTypes,
   ModalStateTypes,
   ToastStateTypes,
-  RootActionsTypes,
-  RootGettersTypes,
-  ToastActionsTypes,
-  ModalActionsTypes,
+  UserGetterTypes,
+  UserActionTypes,
+  ToastActionTypes,
+  ModalActionTypes,
+  ToastGetterTypes,
   ModalGettersTypes,
-  ToastGettersTypes,
-  RootMutationsTypes,
-  ModalMutationsTypes,
-  ToastMutationsTypes,
+  UserMutationTypes,
+  ToastMutationTypes,
+  ModalMutationTypes,
+  IRootState,
 } from '@/types/interfaces/store';
 import { Store as VuexStore, CommitOptions, DispatchOptions } from 'vuex';
 
 //#region *********************** ROOT STORE MODULE TYPES  ***********************/
-export type RootStoreModuleTypes<S = IRootState> = Omit<
-  VuexStore<S>,
-  'commit' | 'getters' | 'dispatch'
-> & {
-  commit<K extends keyof RootMutationsTypes, P extends Parameters<RootMutationsTypes[K]>[1]>(
-    key: K,
-    payload?: P,
-    options?: CommitOptions
-  ): ReturnType<RootMutationsTypes[K]>;
-} & {
-  getters: {
-    [K in keyof RootGettersTypes]: ReturnType<RootGettersTypes[K]>;
-  };
-} & {
-  dispatch<K extends keyof RootActionsTypes>(
-    key: K,
-    payload?: Parameters<RootActionsTypes[K]>[1],
-    options?: DispatchOptions
-  ): ReturnType<RootActionsTypes[K]>;
-};
+export type RootStoreModuleTypes<S = IRootState> = S;
 //#endregion
 //#region *********************** MODAL STORE MODULE TYPES  ***********************/
 export type ModalStoreModuleTypes<S = ModalStateTypes> = Omit<
   VuexStore<S>,
   'commit' | 'getters' | 'dispatch'
 > & {
-  commit<K extends keyof ModalMutationsTypes, P extends Parameters<ModalMutationsTypes[K]>[1]>(
+  commit<K extends keyof ModalMutationTypes, P extends Parameters<ModalMutationTypes[K]>[1]>(
     key: K,
     payload?: P,
     options?: CommitOptions
-  ): ReturnType<ModalMutationsTypes[K]>;
+  ): ReturnType<ModalMutationTypes[K]>;
 } & {
   getters: {
     [K in keyof ModalGettersTypes]: ReturnType<ModalGettersTypes[K]>;
   };
 } & {
-  dispatch<K extends keyof ModalActionsTypes>(
+  dispatch<K extends keyof ModalActionTypes>(
     key: K,
-    payload?: Parameters<ModalActionsTypes[K]>[1],
+    payload?: Parameters<ModalActionTypes[K]>[1],
     options?: DispatchOptions
-  ): ReturnType<ModalActionsTypes[K]>;
+  ): ReturnType<ModalActionTypes[K]>;
 };
 //#endregion
-//#region *********************** TOAAST STORE MODULE TYPES  ***********************/
+//#region *********************** TOAST STORE MODULE TYPES  ***********************/
 export type ToastStoreModuleTypes<S = ToastStateTypes> = Omit<
   VuexStore<S>,
   'commit' | 'getters' | 'dispatch'
 > & {
-  commit<K extends keyof ToastMutationsTypes, P extends Parameters<ToastMutationsTypes[K]>[1]>(
+  commit<K extends keyof ToastMutationTypes, P extends Parameters<ToastMutationTypes[K]>[1]>(
     key: K,
     payload?: P,
     options?: CommitOptions
-  ): ReturnType<ToastMutationsTypes[K]>;
+  ): ReturnType<ToastMutationTypes[K]>;
 } & {
   getters: {
-    [K in keyof ToastGettersTypes]: ReturnType<ToastGettersTypes[K]>;
+    [K in keyof ToastGetterTypes]: ReturnType<ToastGetterTypes[K]>;
   };
 } & {
-  dispatch<K extends keyof ToastActionsTypes>(
+  dispatch<K extends keyof ToastActionTypes>(
     key: K,
-    payload?: Parameters<ToastActionsTypes[K]>[1],
+    payload?: Parameters<ToastActionTypes[K]>[1],
     options?: DispatchOptions
-  ): ReturnType<ToastActionsTypes[K]>;
+  ): ReturnType<ToastActionTypes[K]>;
+};
+//#endregion
+//#region *********************** USER STORE MODULE TYPES  ***********************/
+export type UserStoreModuleTypes<S = UserStateTypes> = Omit<
+  VuexStore<S>,
+  'commit' | 'getters' | 'dispatch'
+> & {
+  commit<K extends keyof UserMutationTypes, P extends Parameters<UserMutationTypes[K]>[1]>(
+    key: K,
+    payload?: P,
+    options?: CommitOptions
+  ): ReturnType<UserMutationTypes[K]>;
+} & {
+  getters: {
+    [K in keyof UserGetterTypes]: ReturnType<UserGetterTypes[K]>;
+  };
+} & {
+  dispatch<K extends keyof UserActionTypes>(
+    key: K,
+    payload?: Parameters<UserActionTypes[K]>[1],
+    options?: DispatchOptions
+  ): ReturnType<UserActionTypes[K]>;
 };
 //#endregion

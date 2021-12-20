@@ -10,6 +10,9 @@ import {
   ToastGetters,
   ToastMutations,
   ToastActions,
+  UserGetters,
+  UserMutations,
+  UserActions,
 } from '../enums/vuex';
 
 export const ROOT_STORE = {
@@ -28,4 +31,10 @@ export const TOAST_STORE = {
   GETTERS: ToastGetters,
   MUTATIONS: ToastMutations,
   ACTIONS: ToastActions,
+};
+
+export const USER_STORE = {
+  GETTERS: UserGetters,
+  MUTATIONS: UserMutations,
+  ACTIONS: UserActions,
 };
