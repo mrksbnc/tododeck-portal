@@ -70,10 +70,13 @@
   import { validateEmail, validatePassword } from '@/utils/validators';
   import notificationFunctions from '@/functions/notificationFunctions';
   import { defineComponent, ref, computed, nextTick } from '@vue/runtime-core';
+  import emitCollection from '@/data/emitCollection';
 
   export default defineComponent({
     name: 'SignUpForm',
-    emits: ['changeComponent'],
+    emits: {
+      changeAuthComponent: emitCollection.changeAuthComponent,
+    },
     setup(props, { emit }) {
       const updateKey = ref(0);
       const isLoading = ref(false);
@@ -152,7 +155,7 @@
 
           await apiService.signUp(dto);
 
-          emit('changeComponent', { component: AuthComponents.LOGIN });
+          emit('changeAuthComponent', { component: AuthComponents.LOGIN });
           notificationFunctions.successAlert({
             title: 'Success',
             text: 'Sign up was successfull!',

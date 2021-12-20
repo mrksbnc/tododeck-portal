@@ -1,19 +1,22 @@
 <template>
-  <div class="w-60 h-full pt-2 pb-2">
-    <div class="bg-slate-200 flex flex-col w-full h-full text-gray-500 items-center rounded-xl">
-      <div class="h-1/6 w-full rounded-tr-lg text-center pt-4">
-        <span class="text-mono text-gray-800 font-bold text-lg"> .tododeck </span>
+  <div class="w-60 h-full pt-1 pb-1 pr-1">
+    <div class="bg-cyan-900 flex flex-col w-full h-full text-white items-center rounded-xl">
+      <div class="h-1/6 py-3 w-full rounded-tr-lg text-center mt-4 mb-5">
+        <span class="font-bold text-lg mb-2">Welcome</span><br />
+        <span class="text-sky-400 font-semibold">Sarah Dayan</span>
       </div>
-      <div class="h-3/6 w-full flex rounded-tr-lg text-center justify-center">
+      <div
+        class="h-3/6 w-full flex rounded-tr-lg text-center mx-auto content-center justify-center"
+      >
         <ul class="list-none text-left">
           <li
             v-for="(menu, id) in featureMenu"
             :key="id"
-            class="block cursor-pointer hover:text-gray-800 pt-4 pb-4 text-lg"
+            class="block cursor-pointer hover:text-cyan-200 py-4 text-lg pr-2"
             @click="clickEventHandler(menu.id, menu.module)"
           >
             <i :class="menu.icon" />
-            <span class="pl-5"> {{ menu.name }} </span>
+            <span class="pl-5 font-semibold font-sans"> {{ menu.name }} </span>
           </li>
         </ul>
       </div>
@@ -24,7 +27,12 @@
               <li
                 v-for="(menu, id) in systemMenu"
                 :key="id"
-                class="block cursor-pointer hover:text-gray-800 pt-3 text-lg"
+                :class="[
+                  menu.id === systemMenuIds.SIGN_OUT
+                    ? 'hover:text-red-400 '
+                    : 'hover:text-cyan-200 ',
+                  'block cursor-pointer pt-3 text-lg',
+                ]"
                 @click="clickEventHandler(menu.id, menu.module)"
               >
                 <i :class="menu.icon" />
@@ -54,6 +62,7 @@
       changeMenuView: emitCollection.changeMenuView,
     },
     setup(props, { emit }) {
+      const systemMenuIds = ref(SystemMenuIds);
       const systemMenu = ref(verticalMenuCollection.system);
       const featureMenu = ref(verticalMenuCollection.feature);
 
@@ -70,7 +79,7 @@
         emit('changeMenuView', { id });
       };
 
-      return { systemMenu, featureMenu, clickEventHandler };
+      return { systemMenuIds, systemMenu, featureMenu, clickEventHandler };
     },
   });
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-row bg-white overflow-hidden p-2">
-    <VerticalNavBar class="w-1/5 h-full" @changeMenuView="changeActiveView" />
+    <VerticalNavBar class="w-1/4 h-full" @changeMenuView="changeActiveView" />
     <div class="w-full h-full">
       <component :is="activeViewComponent" />
     </div>
