@@ -11,7 +11,7 @@
     <div class="h-5/6 bg-slate-100 flex flex-row justify-center items-center mt-5 pr-2">
       <div class="w-full h-full mt-5 rounded-xl overflow-y-scroll">
         <div v-for="(item, id) in projects" :key="id" class="py-1">
-          <ProjectListElement :project="item" class="mx-2 py-2" />
+          <ProjectListElement :project="item" class="mx-2" />
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@
         isLoading.value = true;
         try {
           const response = await apiService.getProjectsByUserId(userId.value);
-          projects.value = response.data.collection;
+          projects.value = response.data.collection.reverse();
         } catch (error) {
           console.error(error);
         } finally {

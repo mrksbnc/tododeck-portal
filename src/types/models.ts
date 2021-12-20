@@ -26,5 +26,4 @@ export type ProjectModel = {
   name: string;
   description?: string;
   userId: number;
-  color: string;
 };
