@@ -5,12 +5,14 @@
   <transition name="ease-out-modal">
     <div
       v-if="visible"
+      :id="modalId"
+      :key="modalId"
       ref="baseModal"
-      class="v-base-modal fixed inset-0 z-modal overflow-x-hidden overflow-y-auto flex"
+      class="fixed inset-0 z-modal overflow-x-hidden overflow-y-auto flex"
     >
-      <div class="modal_dialog relative max-w-screen-sm bg-white rounded-lg m-auto flex flex-col">
-        <div class="v-modal-header items-start justify-between py-5 pl-5 mr-10">
-          <slot name="v-modal-header " />
+      <div class="relative max-w-screen-sm bg-white rounded-lg m-auto flex flex-col">
+        <div class="items-start justify-between py-5 pl-5 mr-10">
+          <slot name="header " />
           <span
             class="absolute text-gray-500 right-2 top-1 mr-2 cursor-pointer hover:text-black"
             @click="closeModal()"
@@ -18,11 +20,11 @@
             <i class="fas fa-times text-xs" />
           </span>
         </div>
-        <div class="overflow-auto v-modal-body flex flex-col items-stretch px-5">
-          <slot name="v-modal-body" />
+        <div class="overflow-auto flex flex-col items-stretch px-5">
+          <slot name="modal__body" />
         </div>
-        <div class="v-modal-footer py-5 px-5">
-          <slot name="v-modal-footer" />
+        <div class="py-5 px-5">
+          <slot name="modal__footer" />
         </div>
       </div>
     </div>
@@ -30,26 +32,26 @@
 </template>
 
 <script lang="ts">
+  import store from '@/store';
   import { defineComponent, ref } from 'vue';
+  import { MODAL_STORE } from '@/data/constants/vuexConstants';
 
   export default defineComponent({
     name: 'BaseModal',
     props: {
-      id: {
+      modalId: {
         type: String,
         default: () => {
-          return `modal_${+new Date()}_${Math.random()}`;
+          return `modal__${+new Date()}__${Math.random()}`;
         },
-      },
-      name: {
-        type: String,
-        required: true,
       },
     },
     setup() {
       const visible = ref(true);
+
       const closeModal = () => {
         visible.value = false;
+        store.dispatch(MODAL_STORE.ACTIONS.CLOSE_MODAL);
       };
 
       return { visible, closeModal };

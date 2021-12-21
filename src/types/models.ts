@@ -10,8 +10,8 @@ export type ToastPropModel = {
 };
 
 export type ModalPropModel<T = undefined> = {
-  id: number;
-  name: string;
+  id: number | string;
+  component: string;
   data?: T;
 };
 

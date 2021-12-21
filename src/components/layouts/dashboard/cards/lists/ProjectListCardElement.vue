@@ -63,7 +63,7 @@
       });
 
       const openEditProjectModal = () => {
-        modalFunctions.openModal({ componentName: 'ProjectModal', data: { id: props.id } });
+        modalFunctions.openModal({ component: 'ProjectModal', data: { id: props.id } });
       };
 
       return { projectId, projectName, projectDescription, openEditProjectModal };

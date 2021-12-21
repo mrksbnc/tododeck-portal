@@ -76,7 +76,7 @@
       };
 
       const openCreateProjectModal = () => {
-        modalFunctions.openModal({ componentName: 'ProjectModal' });
+        modalFunctions.openModal({ component: 'ProjectModal' });
       };
 
       onMounted(async () => {

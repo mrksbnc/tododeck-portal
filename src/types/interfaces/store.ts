@@ -29,10 +29,15 @@ export interface ModalGettersTypes {
 
 export type ModalMutationTypes<S = ModalStateTypes> = {
   [MODAL_STORE.MUTATIONS.CLOSE_MODAL](state: S): void;
+  [MODAL_STORE.MUTATIONS.OPEN_MODAL](state: S, payload: ModalPropModel): void;
 };
 
 export interface ModalActionTypes {
   [MODAL_STORE.ACTIONS.CLOSE_MODAL]({ commit }: AugmentedModalActionContext): void;
+  [MODAL_STORE.ACTIONS.OPEN_MODAL](
+    { commit }: AugmentedModalActionContext,
+    payload: ModalPropModel
+  ): void;
 }
 //#endregion
 //#region *********************** TOAST MODULE TYPES  ***********************/

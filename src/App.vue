@@ -1,9 +1,9 @@
 <template>
-  <ToasterContainer ref="v-toast-container" />
-  <router-view ref="v-layout" v-slot="{ Component }" class="absolute">
+  <ToasterContainer ref="toast__container" />
+  <router-view ref="router__view" v-slot="{ Component }" class="absolute">
     <component :is="Component" />
   </router-view>
-  <ModalContainer ref="v-modal-container" />
+  <ModalContainer ref="modal__container" v-bind="$attrs" class="w-4/6 h-4/6" />
 </template>
 
 <script lang="ts">
