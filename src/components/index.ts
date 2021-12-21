@@ -16,6 +16,7 @@ export function registerComponents(app: App): void {
       .split('/')
       .pop()
       ?.replace(/\.\w+$/, '') as string;
-    app.component(componentName, definition.default);
+    const isExsists = app.component(componentName);
+    if (!isExsists) app.component(componentName, definition.default);
   });
 }

@@ -13,7 +13,7 @@
     </div>
     <div class="w-full h-4/5 flex flex-row">
       <div class="w-1/2 h-full p-1">
-        <ProjectsCard class="w-full h-full" />
+        <ProjectListCard class="w-full h-full" />
       </div>
       <div class="w-1/2 h-full p-1">
         <LoadingCard class="w-full" />

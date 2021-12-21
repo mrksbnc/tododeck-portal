@@ -1,6 +1,6 @@
 <template>
   <BaseModal name="CreateProjectModal" class="w-4/6 h-4/6">
-    <template #header>
+    <template #modal__header>
       <h1 class="text-lg text-gray-700">Create Project</h1>
     </template>
     <template #body> </template>
@@ -12,7 +12,7 @@
   import { defineComponent } from '@vue/runtime-core';
 
   export default defineComponent({
-    name: 'CreateProjectModal',
+    name: 'ProjectModal',
   });
 </script>
 
