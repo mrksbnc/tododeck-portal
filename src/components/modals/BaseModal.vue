@@ -2,15 +2,19 @@
   <div
     v-if="visible"
     ref="modalBackdrop"
-    class="absolute inset-0 opacity-25 z-modal-backdrop bg-black"
-  ></div>
+    class="absolute inset-0 opacity-40 z-modal-backdrop bg-black"
+  />
   <transition name="fade">
     <div
       v-if="visible"
       ref="baseModal"
-      class="modal fixed inset-0 z-modal overflow-x-hidden overflow-y-auto flex"
+      v-bind="$attrs"
+      class="modal fixed inset-0 z-modal overflow-x-hidden mx-auto overflow-y-auto flex"
     >
-      <div class="modal_dialog relative max-w-screen-sm bg-white rounded-lg m-auto flex flex-col">
+      <div
+        class="modal_dialog relative max-w-screen-lg bg-white rounded-lg m-auto flex flex-col"
+        v-bind="$attrs"
+      >
         <div class="modal_header flex items-start justify-between py-5 pl-5 mr-10">
           <slot name="header" />
           <span
@@ -38,16 +42,13 @@
 
   export default defineComponent({
     name: 'BaseModal',
+    inheritAttrs: false,
     props: {
       id: {
         type: String,
         default: () => {
-          return `input_${+new Date()}_${Math.random()}`;
+          return `modal__${+new Date()}_${Math.random()}`;
         },
-      },
-      name: {
-        type: String,
-        required: true,
       },
     },
     setup() {

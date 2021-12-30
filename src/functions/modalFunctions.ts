@@ -1,10 +1,10 @@
 'use strict';
 
 import store from '../store/index';
+import { ModalPropModel } from '@/types/models';
 import { componentNameCollection } from '@/components';
 import { MODAL_STORE } from '@/data/constants/vuexConstants';
 import { notificationFunctions } from './notificationFunctions';
-import { ModalPropModel } from '@/types/models';
 
 class ModalFunctions {
   public openModal<T>({ component, data }: { component: string; data?: T }): void {
@@ -22,7 +22,6 @@ class ModalFunctions {
       data,
     };
 
-    console.log(modalPropModel);
     store.dispatch(MODAL_STORE.ACTIONS.OPEN_MODAL, modalPropModel);
   }
 }

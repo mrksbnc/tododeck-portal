@@ -1,6 +1,10 @@
 <template>
-  <div :id="cardId" :key="projectId" class="bg-white rounded-xl h-36 shadow-lg flex flex-row pt-3">
-    <div class="flex flex-col mx-3 h-full">
+  <div
+    :id="cardId"
+    :key="projectId"
+    class="rounded-xl h-36 shadow-lg flex flex-row mt-1 p-3 bg-white"
+  >
+    <div class="flex flex-col h-full bg-white rounded-xl">
       <div class="flex flex-row justify-between mb-2">
         <span class="text-indigo-800 text-md text-bold">{{ projectName }}</span>
         <span class="cursor-pointer">
@@ -45,7 +49,9 @@
       },
     },
     setup(props) {
+      const isLoading = ref(false);
       const projectId = ref(props.id);
+
       const projectName: ComputedRef<string> = computed(() => {
         const name = props.name;
         if (name) {
@@ -65,8 +71,7 @@
       const openEditProjectModal = () => {
         modalFunctions.openModal({ component: 'ProjectModal', data: { id: props.id } });
       };
-
-      return { projectId, projectName, projectDescription, openEditProjectModal };
+      return { isLoading, projectId, projectName, projectDescription, openEditProjectModal };
     },
   });
 </script>

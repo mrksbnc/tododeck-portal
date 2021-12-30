@@ -1,5 +1,7 @@
 <template>
-  <component :is="modal.component" v-if="modal" :modalId="modal.id" />
+  <div class="w-5/6 h-5/6">
+    <component :is="modal.component" v-if="modal" v-bind="$attrs" />
+  </div>
 </template>
 
 <script lang="ts">
