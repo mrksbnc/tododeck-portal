@@ -9,9 +9,10 @@ export type ToastPropModel = {
   variant: ToastVariants;
 };
 
-export type ModalPropModel = {
-  id: number;
-  name: string;
+export type ModalPropModel<T = undefined> = {
+  id: number | string;
+  component: string;
+  data?: T;
 };
 
 export type UserPropModel = {

@@ -1,5 +1,7 @@
 <template>
-  <component :is="modal.name" v-if="modal" :id="modal.id" />
+  <div class="w-5/6 h-5/6">
+    <component :is="modal.component" v-if="modal" v-bind="$attrs" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -16,11 +18,7 @@
       const modal: ComputedRef<ModalPropModel> = computed(
         () => store.getters[MODAL_STORE.GETTERS.GET_MODAL]
       );
-
       return { modal };
-    },
-    watch: {
-      modal: function (val) {},
     },
   });
 </script>

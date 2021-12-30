@@ -1,28 +1,34 @@
 <template>
-  <transition name="ease-out-overlay">
-    <div v-if="visible" ref="modalBackdrop" class="absolute inset-0 opacity-25 z-40 bg-black" />
-  </transition>
-  <transition name="ease-out-modal">
+  <div
+    v-if="visible"
+    ref="modalBackdrop"
+    class="absolute inset-0 opacity-40 z-modal-backdrop bg-black"
+  />
+  <transition name="fade">
     <div
       v-if="visible"
       ref="baseModal"
-      class="v-base-modal fixed inset-0 z-modal overflow-x-hidden overflow-y-auto flex"
+      v-bind="$attrs"
+      class="modal fixed inset-0 z-modal overflow-x-hidden mx-auto overflow-y-auto flex"
     >
-      <div class="modal_dialog relative max-w-screen-sm bg-white rounded-lg m-auto flex flex-col">
-        <div class="v-modal-header items-start justify-between py-5 pl-5 mr-10">
-          <slot name="v-modal-header " />
+      <div
+        class="modal_dialog relative max-w-screen-lg bg-white rounded-lg m-auto flex flex-col"
+        v-bind="$attrs"
+      >
+        <div class="modal_header flex items-start justify-between py-5 pl-5 mr-10">
+          <slot name="header" />
           <span
             class="absolute text-gray-500 right-2 top-1 mr-2 cursor-pointer hover:text-black"
             @click="closeModal()"
           >
-            <i class="fas fa-times text-xs" />
+            <i class="fas fa-times text-xs"></i>
           </span>
         </div>
-        <div class="overflow-auto v-modal-body flex flex-col items-stretch px-5">
-          <slot name="v-modal-body" />
+        <div class="modal_body overflow-auto flex flex-col items-stretch px-5">
+          <slot name="body" />
         </div>
-        <div class="v-modal-footer py-5 px-5">
-          <slot name="v-modal-footer" />
+        <div class="modal_footer py-5 px-5">
+          <slot name="footer" />
         </div>
       </div>
     </div>
@@ -30,26 +36,29 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue';
+  import store from '@/store';
+  import { defineComponent, ref, nextTick } from 'vue';
+  import { MODAL_STORE } from '@/data/constants/vuexConstants';
 
   export default defineComponent({
     name: 'BaseModal',
+    inheritAttrs: false,
     props: {
       id: {
         type: String,
         default: () => {
-          return `modal_${+new Date()}_${Math.random()}`;
+          return `modal__${+new Date()}_${Math.random()}`;
         },
-      },
-      name: {
-        type: String,
-        required: true,
       },
     },
     setup() {
       const visible = ref(true);
+
       const closeModal = () => {
-        visible.value = false;
+        nextTick(() => {
+          visible.value = false;
+          store.dispatch(MODAL_STORE.ACTIONS.CLOSE_MODAL);
+        });
       };
 
       return { visible, closeModal };
