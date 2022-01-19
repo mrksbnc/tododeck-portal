@@ -6,8 +6,8 @@
 
 <script lang="ts">
   import { useStore } from 'vuex';
-  import { ModalPropModel } from '@/types/models';
-  import { MODAL_STORE } from '@/data/constants/vuexConstants';
+  import { ModalPropModel } from '@/types/vuex/models';
+  import { MODAL_STORE } from '@/data/vuex/vuexConstants';
   import { computed, ComputedRef, defineComponent } from '@vue/runtime-core';
 
   export default defineComponent({

@@ -11,7 +11,7 @@
     "serve": "vite preview",
     "prepare": "husky install",
     "build": "vue-tsc --noEmit && vite build",
-    "lint": "eslint --fix \"src/**/*.{ts,tsx,js,jsx}\" && prettier --write \"src/**/*.{ts,tsx,js,jsx}\""
+    "lint": "eslint --fix \"src/**/*.{vue,ts,tsx,js,jsx}\" && prettier --write \"src/**/*.{vue,ts,tsx,js,jsx}\""
   },
   "dependencies": {
     "axios": "^0.24.0",

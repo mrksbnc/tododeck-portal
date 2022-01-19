@@ -3,12 +3,12 @@
 import {
   IRootState,
   ModalStateTypes,
-  ModalGettersTypes,
   ModalActionTypes,
+  ModalGettersTypes,
   ModalMutationTypes,
-} from '@/types/interfaces/store';
-import { ModalPropModel } from '@/types/models';
-import { MODAL_STORE } from '@/data/constants/vuexConstants';
+} from '@/types/vuex/store';
+import { ModalPropModel } from '@/types/vuex/models';
+import { MODAL_STORE } from '@/data/vuex/vuexConstants';
 import { GetterTree, MutationTree, ActionTree, Module } from 'vuex';
 
 const state: ModalStateTypes = {

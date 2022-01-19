@@ -38,7 +38,7 @@
 <script lang="ts">
   import store from '@/store';
   import { defineComponent, ref, nextTick } from 'vue';
-  import { MODAL_STORE } from '@/data/constants/vuexConstants';
+  import { MODAL_STORE } from '@/data/vuex/vuexConstants';
 
   export default defineComponent({
     name: 'BaseModal',

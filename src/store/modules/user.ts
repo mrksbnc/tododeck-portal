@@ -4,11 +4,11 @@ import {
   IRootState,
   UserStateTypes,
   UserActionTypes,
-  UserMutationTypes,
   UserGetterTypes,
-} from '@/types/interfaces/store';
-import { UserPropModel } from '@/types/models';
-import { USER_STORE } from '@/data/constants/vuexConstants';
+  UserMutationTypes,
+} from '@/types/vuex/store';
+import { UserPropModel } from '@/types/vuex/models';
+import { USER_STORE } from '@/data/vuex/vuexConstants';
 import { Module, ActionTree, GetterTree, MutationTree } from 'vuex';
 
 const state: UserStateTypes = {

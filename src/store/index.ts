@@ -1,14 +1,14 @@
 'use strict';
 
 import {
+  UserStoreModuleTypes,
   RootStoreModuleTypes,
   ToastStoreModuleTypes,
   ModalStoreModuleTypes,
-  UserStoreModuleTypes,
 } from '@/types/vuex/modules';
 import root from './modules/root';
 import { createStore } from 'vuex';
-import { IRootState } from '@/types/interfaces/store';
+import { IRootState } from '@/types/vuex/store';
 
 const store = createStore<IRootState>(root);
 

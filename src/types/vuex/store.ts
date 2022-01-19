@@ -4,9 +4,9 @@ import {
   AugmentedUserActionContext,
   AugmentedModalActionContext,
   AugmentedToastActionContext,
-} from '../vuex/actions';
-import { ModalPropModel, ToastPropModel, UserPropModel } from '../models';
-import { MODAL_STORE, TOAST_STORE, USER_STORE } from '@/data/constants/vuexConstants';
+} from './actions';
+import { ModalPropModel, ToastPropModel, UserPropModel } from './models';
+import { MODAL_STORE, TOAST_STORE, USER_STORE } from '@/data/vuex/vuexConstants';
 
 //#region *********************** STORE TYPES  ***********************/
 export interface StoreActions extends ModalActionTypes, ToastActionTypes, UserActionTypes {}

@@ -4,7 +4,7 @@ import user from './user';
 import modal from './modal';
 import toast from './toast';
 import { ModuleTree, Module } from 'vuex';
-import { IRootState } from '@/types/interfaces/store';
+import { IRootState } from '@/types/vuex/store';
 
 const state: IRootState = {
   root: true,

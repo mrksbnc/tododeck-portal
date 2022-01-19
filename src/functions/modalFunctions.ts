@@ -1,9 +1,9 @@
 'use strict';
 
 import store from '../store/index';
-import { ModalPropModel } from '@/types/models';
+import { ModalPropModel } from '@/types/vuex/models';
 import { componentNameCollection } from '@/components';
-import { MODAL_STORE } from '@/data/constants/vuexConstants';
+import { MODAL_STORE } from '@/data/vuex/vuexConstants';
 import { notificationFunctions } from './notificationFunctions';
 
 class ModalFunctions {

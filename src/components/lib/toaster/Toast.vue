@@ -62,7 +62,7 @@
         </svg>
       </div>
       <div class="px-4 py-3">
-        <div class="mb-2 w-7/8">
+        <div class="p-2 w-7/8">
           <span :class="titleColor" class="font-semibold">{{ title }}</span>
           <p class="text-xs text-gray-600 dark:text-gray-200 text-left">
             {{ processedMessage }}
@@ -84,8 +84,8 @@
   } from '@vue/runtime-core';
   import store from '@/store';
   import Timer from '@/utils/timer';
-  import ToastVariants from '@/data/enums/toastVariants';
-  import { TOAST_STORE } from '@/data/constants/vuexConstants';
+  import { TOAST_STORE } from '@/data/vuex/vuexConstants';
+  import ToastVariants from '@/data/enums/toastVariantEnum';
 
   export default defineComponent({
     name: 'BaseToast',

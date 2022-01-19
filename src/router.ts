@@ -8,13 +8,8 @@ const router: Router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'Landing',
-      component: () => import('./views/LandingPageView.vue'),
-    },
-    {
-      path: '/dashboard',
-      name: 'Dashboard',
-      component: () => import('./views/DashboardView.vue'),
+      name: 'Authentication',
+      component: () => import('./views/AuthenticationView.vue'),
     },
   ],
 });
@@ -24,10 +19,6 @@ router.beforeResolve((to, from, next) => {
 
   if (!validTokenFound && to.path != '/') {
     next({ path: '/' });
-    return;
-  }
-  if (validTokenFound && to.path == '/') {
-    next({ name: 'Dashboard', path: '/dashboard' });
     return;
   }
   next();

@@ -8,7 +8,7 @@ import {
   UserMutationTypes,
   ToastMutationTypes,
   ModalMutationTypes,
-} from '../interfaces/store';
+} from './store';
 import { ActionContext } from 'vuex';
 
 export type AugmentedModalActionContext = {

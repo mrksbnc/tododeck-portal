@@ -3,17 +3,17 @@
 import {
   RootActions,
   RootGetters,
-  RootMutations,
-  ModalActions,
-  ModalGetters,
-  ModalMutations,
-  ToastGetters,
-  ToastMutations,
-  ToastActions,
   UserGetters,
-  UserMutations,
   UserActions,
-} from '../enums/vuex';
+  ToastActions,
+  ModalGetters,
+  ModalActions,
+  ToastGetters,
+  RootMutations,
+  UserMutations,
+  ModalMutations,
+  ToastMutations,
+} from './vuex';
 
 export const ROOT_STORE = {
   GETTERS: RootGetters,

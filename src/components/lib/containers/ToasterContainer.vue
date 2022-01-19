@@ -16,8 +16,8 @@
 
 <script lang="ts">
   import { useStore } from 'vuex';
-  import { ToastPropModel } from '@/types/models';
-  import { TOAST_STORE } from '@/data/constants/vuexConstants';
+  import { ToastPropModel } from '@/types/vuex/models';
+  import { TOAST_STORE } from '@/data/vuex/vuexConstants';
   import { computed, ComputedRef, defineComponent } from '@vue/runtime-core';
 
   export default defineComponent({

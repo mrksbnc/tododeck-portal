@@ -1,6 +1,6 @@
 'use strict';
 
-import config from '@/config';
+import config from '@/config/config';
 import { getToken } from '@/utils/token';
 import axios, { AxiosRequestConfig } from 'axios';
 

@@ -12,7 +12,7 @@ import {
   ToastMutationTypes,
   ModalMutationTypes,
   IRootState,
-} from '@/types/interfaces/store';
+} from '@/types/vuex/store';
 import { Store as VuexStore, CommitOptions, DispatchOptions } from 'vuex';
 
 //#region *********************** ROOT STORE MODULE TYPES  ***********************/

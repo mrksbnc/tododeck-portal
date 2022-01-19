@@ -1,10 +1,10 @@
 'use strict';
 
-enum ToastVariants {
+enum ToastVariantEnum {
   SUCCESS = 'SUCCESS',
   INFO = 'INFO',
   WARNING = 'WARNING',
   ERROR = 'ERROR',
 }
 
-export default ToastVariants;
+export default ToastVariantEnum;

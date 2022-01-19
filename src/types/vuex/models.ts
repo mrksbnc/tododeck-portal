@@ -1,9 +1,9 @@
 'use strict';
 
-import ToastVariants from '@/data/enums/toastVariants';
+import ToastVariants from '@/data/enums/toastVariantEnum';
 
 export type ToastPropModel = {
-  id: number;
+  id: string;
   title: string;
   text: string;
   variant: ToastVariants;

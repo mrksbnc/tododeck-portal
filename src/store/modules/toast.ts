@@ -6,9 +6,9 @@ import {
   ToastActionTypes,
   ToastGetterTypes,
   ToastMutationTypes,
-} from '@/types/interfaces/store';
-import { ToastPropModel } from '@/types/models';
-import { TOAST_STORE } from '@/data/constants/vuexConstants';
+} from '@/types/vuex/store';
+import { ToastPropModel } from '@/types/vuex/models';
+import { TOAST_STORE } from '@/data/vuex/vuexConstants';
 import { ActionTree, GetterTree, Module, MutationTree } from 'vuex';
 
 const state: ToastStateTypes = {
@@ -23,12 +23,12 @@ const getters: GetterTree<ToastStateTypes, IRootState> & ToastGetterTypes = {
 
 const mutations: MutationTree<ToastStateTypes> & ToastMutationTypes = {
   [TOAST_STORE.MUTATIONS.ADD_TOAST]: (state: ToastStateTypes, payload: ToastPropModel): void => {
-    payload.id = Math.random() + Date.now();
+    payload.id = Math.random() + '_' + Date.now();
     state.toasts.push(payload);
   },
   [TOAST_STORE.MUTATIONS.REMOVE_TOAST]: (state: ToastStateTypes, payload: string): void => {
     return state.toasts.forEach((e, i) => {
-      if (e.id === Number(payload)) state.toasts.slice(i, 1);
+      if (e.id === payload) state.toasts.slice(i, 1);
     });
   },
 };

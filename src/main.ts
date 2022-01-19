@@ -3,8 +3,8 @@ import App from './App.vue';
 import store from './store';
 import router from './router';
 import { createApp } from 'vue';
-import { apiService } from './services/apiService';
 import { registerComponents } from './components';
+import { apiService } from './services/apiService';
 import { getToken, isTokenValid, parseJwt } from './utils/token';
 
 const Portal = createApp(App).use(store).use(router);
