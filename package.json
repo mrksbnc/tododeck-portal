@@ -14,8 +14,8 @@
     "lint": "eslint --fix \"src/**/*.{ts,tsx,js,jsx}\" && prettier --write \"src/**/*.{ts,tsx,js,jsx}\""
   },
   "dependencies": {
-    "axios": "^0.27.2",
-    "vue": "^3.2.26",
+    "axios": "^0.24.0",
+    "vue": "^3.2.30",
     "vue-router": "^4.0.12",
     "vuex": "^4.1.0"
   },
